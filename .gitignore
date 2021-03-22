@@ -6,6 +6,17 @@ __pycache__/
 # C extensions
 *.so
 
+#PLY
+*.pyc
+*.pyo
+__pycache__
+*.out
+*.dif
+*~
+/dist
+/build
+/*.egg-info
+
 # Distribution / packaging
 .Python
 build/
