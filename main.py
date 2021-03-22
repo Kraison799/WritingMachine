@@ -132,11 +132,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def save(self):
         global nombrearch
 
-        if nombrearch != '':
-            archi1 = open(nombrearch, "w", encoding="utf-8")
-            archi1.write(codeEditor.toPlainText())
-            archi1.close()
-            mb.showinfo("Información", "Los datos fueron guardados en el archivo.")
+        try:
+            if nombrearch != '':
+                archi1 = open(nombrearch, "w", encoding="utf-8")
+                archi1.write(codeEditor.toPlainText())
+                archi1.close()
+                mb.showinfo("Información", "Los datos fueron guardados en el archivo.")
+        except:
+            print("ERROR")
+            ###mb.showinfo("Ocurrio un error, asegurese de haber cargado un archivo previamente")
 
 
     def Compile_start(self):
