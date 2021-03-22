@@ -47,8 +47,8 @@ def t_INVALID_ID(t):
     if token:
         t.type = token
         return t
-    t.type = "Invalid ID in line " + str(t.lexer.lineno)
-    return t
+    else:
+        t_error(t)
 
 
 
@@ -63,8 +63,10 @@ def t_RESERVED(t):
 # Error handling rule
 def t_error(t):
     if t.type == "length_err":
-        print ("Lexical error: ID length must be between 3 and 11")
+        print ("Lexical error at line "+str(t.lexer.lineno)+": ID length must be between 3 and 11")
         t.lexer.skip(1)
+    elif t.type == "INVALID_ID":
+        print ("Lexical error at line "+str(t.lexer.lineno)+": Identifiers cannot start with Upper case")
     else:
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
