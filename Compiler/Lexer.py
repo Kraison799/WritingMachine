@@ -15,7 +15,7 @@ from Rules import *
 # TEST
 def lex_test():
     lexer = lex.lex()
-    data = '''
+    data = '''--This is a comment
     ;,[]()=
     dAs&@f
     Arr2%

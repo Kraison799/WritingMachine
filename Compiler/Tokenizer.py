@@ -1,7 +1,12 @@
 # ------------------------------------------------------------
-# Tokenizer.py
+# File: Lexer.py
+# Developed by: Kevin Barrantes Cerdas
+# Project: Writing Machine
+# version: 0.1
 #
-# tokenizer for a the writing machine programming language
+# Description: A tokenizer for the writing machine language
+# lexical analysis
+# TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
 
