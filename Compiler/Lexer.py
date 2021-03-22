@@ -26,6 +26,8 @@ def lex_test():
     while
     Def
     Run
+    876rtg
+    64
     If
     IfElse
     **    *

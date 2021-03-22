@@ -20,9 +20,13 @@ def t_newline(t):
 #Defines a rule that ignores lines that start with --
 def t_COMMENT(t):
     r'\--.*'
-    t.value = "comment on line " + str(t.lexer.lineno)
+    t.value = str(t.value) + str(t.lexer.lineno)
     return t
 
+def t_INTEGER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
 
 # A string containing ignored characters (spaces and tabs)
 t_ignore = ' \t'
@@ -33,6 +37,18 @@ def t_ID(t):
     if 3 <= len(t.value) < 11:
         t.type = reserved.get(t.value, 'ID')  # Check for reserved words
         return t
+    else:
+        t.type = "length_err"
+        t_error(t)
+
+def t_INVALID_ID(t):
+    r'[A-Z][a-zA-Z_0-9@&]*'
+    token = reserved.get(t.value)
+    if token:
+        t.type = token
+        return t
+    t.type = "Invalid ID in line " + str(t.lexer.lineno)
+    return t
 
 
 
@@ -46,5 +62,9 @@ def t_RESERVED(t):
 
 # Error handling rule
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
-    t.lexer.skip(1)
+    if t.type == "length_err":
+        print ("Lexical error: ID length must be between 3 and 11")
+        t.lexer.skip(1)
+    else:
+        print("Illegal character '%s'" % t.value[0])
+        t.lexer.skip(1)
