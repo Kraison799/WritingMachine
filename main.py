@@ -21,6 +21,7 @@ class LineNumberArea(QWidget):
         super().__init__(editor)
         self.codeEditor = editor
 
+
     def sizeHint(self):
         return QSize(self.editor.lineNumberAreaWidth(), 0)
 
@@ -108,16 +109,25 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.b_load.clicked.connect(self.buttonClicked)
         self.b_save.clicked.connect(self.save)
+        self.b_compile.clicked.connect(self.On_compile_click)
+
+        self.errores.setStyleSheet("QPlainTextEdit { color: green}")
+        self.errores.setReadOnly(1)
+        self.errores.setMaximumHeight(150)
 
     def buttonClicked(self):
-        global nombrearch
-        nombrearch = askopenfilename(initialdir="/", title="Seleccione archivo",
-                                     filetypes=(("txt files", "*.txt"), ("todos los archivos", "*.*")))
-        if nombrearch != '':
-            archi1 = open(nombrearch, "r", encoding="utf-8")
-            contenido = archi1.read()
-            archi1.close()
-            codeEditor.setPlainText(contenido)
+        try:
+            global nombrearch
+            nombrearch = askopenfilename(initialdir="/", title="Seleccione archivo",
+                                         filetypes=(("txt files", "*.txt"), ("todos los archivos", "*.*")))
+            if nombrearch != '':
+                archi1 = open(nombrearch, "r", encoding="utf-8")
+                contenido = archi1.read()
+                archi1.close()
+                codeEditor.setPlainText(contenido)
+        except:
+            print("Ningun archivo fue seleccionado")
+
 
     def save(self):
         global nombrearch
@@ -128,6 +138,22 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             archi1.close()
             mb.showinfo("Información", "Los datos fueron guardados en el archivo.")
 
+
+    def Compile_start(self):
+        ###Funcion para compilar
+        print("compilado")
+
+    def On_compile_click(self):
+
+        ###Llamado de la compilacion y recibe la respuesta del compilador desde la funcion compile_start
+        respuesta = "El codigo se compilo correctamente"
+
+        self.errores.clear()
+        self.errores.insertPlainText(respuesta)
+
+    def Run_code(self):
+        ### Envia el codigo compilado usando compile_start
+        print("Ejecucion")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
