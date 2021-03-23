@@ -9,38 +9,25 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 import ply.lex as lex
+import Syntactic.Parser as syntactic
 from Rules import *
 
 
+
 # TEST
+
 def lex_test():
     lexer = lex.lex()
-    data = '''--This is a comment
-    ;,[]()=
-    dAs&@f
-    Arr2%
-    aRr2&
-    Arr
-    se
-    While
-    while
-    Def
-    Run
-    876rtg
-    64
-    If
-    IfElse
-    **    *
-    
-    $
-    iDentify
-    '''
+    data = '''Mult(3,9);'''
     lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        print(tok)
+    print("---END OF TOKENS---")
+    syntactic.parse(lexer)
+    # while True:
+    #     tok = lexer.token()
+    #     if not tok:
+    #         break
+    #     print(tok)
+
 
 
 if __name__ == '__main__':
