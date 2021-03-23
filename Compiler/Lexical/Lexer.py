@@ -8,8 +8,8 @@
 # lexical analysis
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import ply.lex as lex
-import Syntactic.Parser as syntactic
+import Compiler.ply.lex as lex
+import Compiler.Syntactic.Parser as syntactic
 from Rules import *
 
 
