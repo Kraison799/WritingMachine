@@ -17,6 +17,7 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+
 #Defines a rule that ignores lines that start with --
 def t_COMMENT(t):
     r'\--.*'
