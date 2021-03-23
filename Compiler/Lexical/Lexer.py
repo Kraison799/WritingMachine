@@ -18,7 +18,7 @@ from Rules import *
 
 def lex_test():
     lexer = lex.lex()
-    data = '''Mult(3,9);'''
+    data = '''Power(3,5);'''
     lexer.input(data)
     print("---END OF TOKENS---")
     syntactic.parse(lexer)

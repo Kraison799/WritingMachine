@@ -22,6 +22,14 @@ def p_reserved_mult(p):
     'reserved : Mult LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
     p[0] = p[3] * p[5]
 
+def p_reserved_div(p):
+    'reserved : Div LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
+    p[0] = p[3] // p[5]
+
+def p_reserved_power(p):
+    'reserved : Power LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
+    p[0] = p[3]**p[5]
+
 
 def p_factor_num(p):
     'factor : INTEGER'
