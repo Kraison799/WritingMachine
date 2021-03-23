@@ -18,7 +18,7 @@ from Rules import *
 
 def lex_test():
     lexer = lex.lex()
-    data = '''Substr(3,5);'''
+    data = '''Speed 10;'''
     lexer.input(data)
     print("---END OF TOKENS---")
     syntactic.parse(lexer)

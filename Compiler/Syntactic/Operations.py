@@ -10,6 +10,7 @@
 # ------------------------------------------------------------
 start = 'reserved'
 
+
 def p_reserved_sum(p):
     'reserved : Sum LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
     p[0] = p[3] + p[5]
@@ -30,10 +31,35 @@ def p_reserved_power(p):
     'reserved : Power LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
     p[0] = p[3]**p[5]
 
+def p_reserved_pos(p):
+    'reserved : Pos LSQRBRACKET INTEGER COMMA INTEGER RSQRBRACKET SEMICOLON'
+    p[0] = [p[3],p[5]]
+
+
+def p_reserved_posX(p):
+    'reserved : PosX INTEGER SEMICOLON'
+    p[0] = [p[2]]
+
+def p_reserved_posY(p):
+    'reserved : PosY INTEGER SEMICOLON'
+    p[0] = [p[2]]
+
+def p_reserved_UseColor(p):
+    'reserved : UseColor INTEGER SEMICOLON'
+    p[0] = p[2]
+
+def p_reserved_Begin(p):
+    'reserved : Begin SEMICOLON'
+    p[0] = [1,1]
+
+def p_reserved_Speed(p):
+    'reserved : Speed INTEGER SEMICOLON'
+    p[0] = p[2]
+
+
 def p_factor_num(p):
     'factor : INTEGER'
     p[0] = p[1]
-
 
 
 # Error rule for syntax errors
