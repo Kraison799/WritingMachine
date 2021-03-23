@@ -28,8 +28,8 @@ t_RSQRBRACKET = r'\]'
 
 reserved = {
     'Def': 'Def',
-    'Put' : 'PUT',
-    'Add' : 'ADD',
+    'PUT' : 'Put',
+    'ADD' : 'Add',
     'ContinueUp' : 'ContinueUp',
     'ContinueDown' : 'ContinueDown',
     'ContinueRight' : 'ContinueRight',
@@ -58,7 +58,9 @@ reserved = {
     'Mult' : 'Mult',
     'Power' : 'Power',
     'Div' : 'Div',
-    'Sum' : 'Sum'
+    'Sum' : 'Sum',
+    'FALSE' : 'False',
+    'TRUE' : 'True'
 }
 
 # List of token names
