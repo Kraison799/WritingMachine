@@ -30,7 +30,6 @@ def p_reserved_power(p):
     'reserved : Power LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
     p[0] = p[3]**p[5]
 
-
 def p_factor_num(p):
     'factor : INTEGER'
     p[0] = p[1]
