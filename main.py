@@ -110,6 +110,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.b_load.clicked.connect(self.buttonClicked)
         self.b_save.clicked.connect(self.save)
         self.b_compile.clicked.connect(self.On_compile_click)
+        self.b_run.clicked.connect(self.Run_code)
 
         self.errores.setStyleSheet("QPlainTextEdit { color: green}")
         self.errores.setReadOnly(1)
