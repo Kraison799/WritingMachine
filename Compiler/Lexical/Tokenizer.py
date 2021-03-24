@@ -60,7 +60,9 @@ reserved = {
     'Div' : 'Div',
     'Sum' : 'Sum',
     'FALSE' : 'False',
-    'TRUE' : 'True'
+    'TRUE' : 'True',
+    'PARA' : 'Para',
+    'FIN'  : 'Fin'
 }
 
 # List of token names
