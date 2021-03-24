@@ -10,10 +10,9 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-import Compiler.ply.yacc as yacc
-from Compiler.Syntactic.Operations import *
-from Compiler.Lexical.Tokenizer import tokens
-
+import ply.yacc as yacc
+from Syntactic.Operations import *
+from Lexical.Tokenizer import tokens
 
 # Build the parser
 def parse(lex):
