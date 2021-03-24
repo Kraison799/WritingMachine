@@ -28,8 +28,8 @@ t_RSQRBRACKET = r'\]'
 
 reserved = {
     'Def': 'Def',
-    'PUT' : 'Put',
-    'ADD' : 'Add',
+    'Put' : 'Put',
+    'Add' : 'Add',
     'ContinueUp' : 'ContinueUp',
     'ContinueDown' : 'ContinueDown',
     'ContinueRight' : 'ContinueRight',
