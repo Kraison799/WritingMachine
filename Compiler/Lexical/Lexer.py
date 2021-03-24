@@ -10,15 +10,15 @@
 # ------------------------------------------------------------
 import Compiler.ply.lex as lex
 import Compiler.Syntactic.Parser as syntactic
-from Rules import *
+from Compiler.Lexical.Rules import *
 
 
 
 # TEST
 
-def lex_test():
+def lex_test(codeEditor):
     lexer = lex.lex()
-    data = '''Speed 10;'''
+    data = codeEditor.toPlainText()
     lexer.input(data)
     print("---END OF TOKENS---")
     syntactic.parse(lexer)
@@ -29,6 +29,7 @@ def lex_test():
     #     print(tok)
 
 
-
+"""
 if __name__ == '__main__':
     lex_test()
+"""

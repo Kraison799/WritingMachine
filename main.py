@@ -11,6 +11,8 @@ from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
 import tkinter as tk
 
+import Compiler.Lexical.Lexer as Lexer
+
 qtCreatorFile = "IDE.ui"
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
@@ -159,6 +161,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def Run_code(self):
         ### Envia el codigo compilado usando compile_start
         print("Ejecucion")
+        Lexer.lex_test(codeEditor)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

@@ -9,7 +9,7 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-from Tokenizer import *
+from Compiler.Lexical.Tokenizer import *
 
 
 # Define a rule so we can track line numbers
