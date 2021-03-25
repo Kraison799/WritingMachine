@@ -34,7 +34,7 @@ t_ignore = ' \t'
 
 
 def t_ID(t):
-    r'[a-z][a-zA-Z_0-9&@_]*'
+    r'[a-z][a-zA-Z_0-9&@]*'
     if 3 <= len(t.value) < 11:
         t.type = reserved.get(t.value, 'ID')  # Check for reserved words
         return t

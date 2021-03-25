@@ -8,8 +8,8 @@
 # lexical analysis
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Compiler.ply.lex as lex
-import Compiler.Syntactic.Parser as syntactic
+import ply.lex as lex
+import Syntactic.Parser as syntactic
 from Rules import *
 
 
@@ -18,15 +18,15 @@ from Rules import *
 
 def lex_test():
     lexer = lex.lex()
-    data = '''Speed 10;'''
+    data = '''ContinueLeft Mult(2,2);'''
     lexer.input(data)
-    print("---END OF TOKENS---")
     syntactic.parse(lexer)
     # while True:
     #     tok = lexer.token()
     #     if not tok:
     #         break
     #     print(tok)
+    # print("---END OF TOKENS---")
 
 
 
