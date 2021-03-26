@@ -16,8 +16,21 @@ from Lexical.Tokenizer import tokens
 
 results = []
 precedence = (('right', 'UMINUS'),)
-start = 'procedure'
+start = 'structure'
 
+
+def p_structure(p):
+    '''structure : COMMENT\
+    chain'''
+    p[0] = p[1]
+
+def p_chain(p):
+    'chain : procedure chain'
+    p[0] = p[1]
+
+def p_chain_empty(p):
+    'chain :'
+    pass
 
 
 # Build the parser
