@@ -11,13 +11,20 @@
 # ------------------------------------------------------------
 
 import ply.yacc as yacc
-from Syntactic.Operations import *
+from Syntactic.Procedures import*
 from Lexical.Tokenizer import tokens
+
+results = []
+precedence = (('right', 'UMINUS'),)
+start = 'procedure'
+
+
 
 # Build the parser
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
-    print("SYNTACTIC RESULT:",result)
+    print(results)
+
 
 

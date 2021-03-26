@@ -23,6 +23,7 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LSQRBRACKET = r'\['
 t_RSQRBRACKET = r'\]'
+t_MINUS = r'\-'
 
 # Reserved words
 
@@ -68,4 +69,4 @@ reserved = {
 # List of token names
 tokens = ['ASSIGN', 'NUMBER', 'COMMA', 'SEMICOLON', 'LPAREN', 'RPAREN',
           'LSQRBRACKET', 'RSQRBRACKET', 'ID', 'RESERVED', 'INTEGER', 'COMMENT',
-          'INVALID_ID'] + list(reserved.values())
+          'INVALID_ID', 'MINUS', 'PARA', 'FIN'] + list(reserved.values())
