@@ -10,15 +10,34 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-import Compiler.ply.yacc as yacc
-from Compiler.Syntactic.Operations import *
-from Compiler.Lexical.Tokenizer import tokens
+import ply.yacc as yacc
+from Syntactic.Procedures import*
+from Lexical.Tokenizer import tokens
+
+results = []
+precedence = (('right', 'UMINUS'),)
+start = 'structure'
+
+
+def p_structure(p):
+    '''structure : COMMENT\
+    chain'''
+    p[0] = p[1]
+
+def p_chain(p):
+    'chain : procedure chain'
+    p[0] = p[1]
+
+def p_chain_empty(p):
+    'chain :'
+    pass
 
 
 # Build the parser
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
-    print("SYNTACTIC RESULT:",result)
+    print(results)
+
 
 
