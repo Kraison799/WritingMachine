@@ -13,8 +13,10 @@
 import ply.yacc as yacc
 from Syntactic.Procedures import*
 from Lexical.Tokenizer import tokens
+from TreeStructure.Node import *
 
 results = []
+ast = TreeNode("ROOT")
 precedence = (('right', 'UMINUS'),)
 start = 'structure'
 
@@ -37,7 +39,9 @@ def p_chain_empty(p):
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
+    print(result)
     print(results)
+    print(ast.children[0].value,ast.children[1].value)
 
 
 

@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="baa92472-3d88-4a24-b924-991430834b17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lexical/Lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lexical/Lexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lexical/Tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lexical/Tokenizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Syntactic/Orders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Syntactic/Orders.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Syntactic/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Syntactic/Parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Syntactic/Procedures.py" beforeDir="false" afterPath="$PROJECT_DIR$/Syntactic/Procedures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

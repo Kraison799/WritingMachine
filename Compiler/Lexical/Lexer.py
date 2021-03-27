@@ -30,7 +30,7 @@ def lex_test():
                             ];
                         ];
                 FIN
-                PARA proc01 [0,1,10]
+                PARA proc02 [12,TRUE]
                     Run [
                         Def id05 = 4;
                         Def id06 = 5;
