@@ -39,8 +39,6 @@ def p_order_conditional(p):
 def p_conditional_if(p):
     'conditional : If LPAREN comparison RPAREN LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
     if p[3] == "TRUE":
-        result = parser.results
-        print(result)
         p[0] = "TRUE"
 
     if p[3] == "FALSE":

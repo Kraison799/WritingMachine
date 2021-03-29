@@ -69,4 +69,4 @@ reserved = {
 # List of token names
 tokens = ['ASSIGN', 'NUMBER', 'COMMA', 'SEMICOLON', 'LPAREN', 'RPAREN',
           'LSQRBRACKET', 'RSQRBRACKET', 'ID', 'RESERVED', 'INTEGER', 'COMMENT',
-          'INVALID_ID', 'MINUS', 'PARA', 'FIN'] + list(reserved.values())
+          'INVALID_ID', 'MINUS'] + list(reserved.values())
