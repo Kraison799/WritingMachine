@@ -8,9 +8,9 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Syntactic.Comparisons import *
-from Syntactic.Atomic import *
-import Syntactic.Parser as parser
+from Compiler.Syntactic.Comparisons import *
+from Compiler.Syntactic.Atomic import *
+import Compiler.Syntactic.Parser as parser
 
 
 def p_operation_sum(p):

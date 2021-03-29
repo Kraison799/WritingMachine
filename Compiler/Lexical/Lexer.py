@@ -18,30 +18,7 @@ from Compiler.Lexical.Rules import *
 
 def lex_test(codeEditor):
     lexer = lex.lex()
-    data = '''--This is a comment!
-                PARA proc01 [0,1,10]
-                    Run [
-                        Def id05 = 4;
-                        Def id06 = 5;
-                        If(Greater(5,4))[
-                            If(Equal(2,2))[
-                                Mult(10,10);
-                                ];
-                            ];
-                        ];
-                FIN
-                PARA proc01 [0,1,10]
-                    Run [
-                        Def id05 = 4;
-                        Def id06 = 5;
-                        If(Greater(5,4))[
-                            If(Equal(2,2))[
-                                Mult(20,20);
-                                ];
-                            ];
-                        ];
-                FIN
-                '''
+    data = codeEditor.toPlainText()
 
     lexer.input(data)
     syntactic.parse(lexer)

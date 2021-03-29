@@ -10,9 +10,9 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-import ply.yacc as yacc
-from Syntactic.Procedures import*
-from Lexical.Tokenizer import tokens
+import Compiler.ply.yacc as yacc
+from Compiler.Syntactic.Procedures import*
+from Compiler.Lexical.Tokenizer import tokens
 
 results = []
 precedence = (('right', 'UMINUS'),)

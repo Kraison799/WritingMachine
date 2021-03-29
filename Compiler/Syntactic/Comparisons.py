@@ -8,8 +8,8 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Syntactic.Parser as parser
-from Syntactic.Atomic import *
+import Compiler.Syntactic.Parser as parser
+from Compiler.Syntactic.Atomic import *
 
 def p_comparison_smaller(p):
     'comparison : Smaller LPAREN numerical COMMA numerical RPAREN'

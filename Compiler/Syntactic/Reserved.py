@@ -10,7 +10,7 @@
 # ------------------------------------------------------------
 
 from random import randint
-from Syntactic.Operations import *
+from Compiler.Syntactic.Operations import *
 SymbolTable = {'PROC_01': [['id01', int, 2], ['id02', str, "FALSE"], ['id03', int, -10]]}
 # SymbolTable = {}
 CurrentScope = "PROC_01"
