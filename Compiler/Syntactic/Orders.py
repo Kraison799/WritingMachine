@@ -35,6 +35,10 @@ def p_order_conditional(p):
     'order : conditional'
     p[0] = p[1]
 
+# Loop orders
+def p_order_loop(p):
+    'order : loop'
+
 
 def p_conditional_if(p):
     'conditional : If LPAREN comparison RPAREN LSQRBRACKET sequence RSQRBRACKET SEMICOLON'

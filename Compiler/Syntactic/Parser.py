@@ -13,6 +13,7 @@
 import Compiler.ply.yacc as yacc
 from Compiler.Syntactic.Procedures import*
 from Compiler.Lexical.Tokenizer import tokens
+from Compiler.TreeStructure.Node import TreeNode
 
 results = []
 ast = TreeNode("ROOT")
