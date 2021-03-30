@@ -8,8 +8,8 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Syntactic.Parser as parser
-from Syntactic.Orders import *
+import Compiler.Syntactic.Parser as parser
+from Compiler.Syntactic.Orders import *
 arguments = []
 
 def p_procedure(p):

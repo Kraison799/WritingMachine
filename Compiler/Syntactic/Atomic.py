@@ -8,17 +8,20 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Syntactic.Parser as parser
+import Compiler.Syntactic.Parser as parser
+from Compiler.Semantic.TypeModels import *
 
 #BOOLEAN VALUES
 def p_bool_true(p):
     'bool : True'
-    p[0] = p[1]
+    value = BooleanValue(p[1])
+    p[0] = value
 
 
 def p_bool_false(p):
     'bool : False'
-    p[0] = p[1]
+    value = BooleanValue(p[1])
+    p[0] = value
 
 #NUMERICAL VALUES
 def p_numerical_positive(p):
@@ -40,3 +43,10 @@ def p_factor_num(p):
 def p_factor_bool(p):
     'factor : bool'
     p[0] = p[1]
+
+
+# Error rule for syntax errors
+def p_error(p):
+    if p:
+        error_message = "Syntax error in line: " + str(p.lineno)
+        print(error_message)

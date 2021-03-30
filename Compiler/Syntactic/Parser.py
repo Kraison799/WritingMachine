@@ -10,15 +10,15 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-import ply.yacc as yacc
-from Syntactic.Procedures import*
-from Lexical.Tokenizer import tokens
-from TreeStructure.Node import *
+import Compiler.ply.yacc as yacc
+from Compiler.Syntactic.Procedures import*
+from Compiler.Lexical.Tokenizer import tokens
+from Compiler.TreeStructure.Node import *
 
 results = []
 ast = TreeNode("ROOT")
 precedence = (('right', 'UMINUS'),)
-start = 'structure'
+start = 'sequence'
 
 
 def p_structure(p):
@@ -39,9 +39,7 @@ def p_chain_empty(p):
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
-    print(result)
-    print(results)
-    print(ast.children[0].value,ast.children[1].value)
+    result.calculate()
 
 
 

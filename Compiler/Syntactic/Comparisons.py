@@ -8,27 +8,19 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Syntactic.Parser as parser
-from Syntactic.Atomic import *
+import Compiler.Syntactic.Parser as parser
+from Compiler.Syntactic.Atomic import *
+from Compiler.Semantic.ComparisonModels import *
 
 def p_comparison_smaller(p):
     'comparison : Smaller LPAREN numerical COMMA numerical RPAREN'
-    if p[3] < p[5]:
-        p[0] = "TRUE"
-    else:
-        p[0] = "FALSE"
+    p[0] = Smaller(p[3], p[5])
 
 
 def p_comparison_equal(p):
     'comparison : Equal LPAREN numerical COMMA numerical RPAREN'
-    if p[3] == p[5]:
-        p[0] = "TRUE"
-    else:
-        p[0] = "FALSE"
+    p[0] = Equal(p[3], p[5])
 
 def p_comparison_greater(p):
     'comparison : Greater LPAREN numerical COMMA numerical RPAREN'
-    if p[3] > p[5]:
-        p[0] = "TRUE"
-    else:
-        p[0] = "FALSE"
+    p[0] = Greater(p[3], p[5])

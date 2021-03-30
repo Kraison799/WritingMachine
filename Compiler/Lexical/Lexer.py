@@ -8,8 +8,8 @@
 # lexical analysis
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import ply.lex as lex
-import Syntactic.Parser as syntactic
+import Compiler.ply.lex as lex
+import Compiler.Syntactic.Parser as syntactic
 from Rules import *
 
 
@@ -18,31 +18,32 @@ from Rules import *
 
 def lex_test():
     lexer = lex.lex()
-    data = '''--This is a comment!
-                PARA proc01 [0,1,10]
-                    Run [
-                        Def id05 = 4;
-                        Def id06 = 5;
-                        If(Greater(5,4))[
-                            If(Equal(2,2))[
-                                Mult(10,10);
-                                ];
-                            ];
-                        ];
-                FIN
-                PARA proc02 [12,TRUE]
-                    Run [
-                        Def id05 = 4;
-                        Def id06 = 5;
-                        If(Greater(5,4))[
-                            If(Equal(2,2))[
-                                Mult(20,20);
-                                ];
-                            ];
-                        ];
-                FIN
-                '''
-
+    # data = '''--This is a comment!
+    #             PARA proc01 [0,1,10]
+    #                 Run [
+    #                     Def id05 = 4;
+    #                     Def id06 = 5;
+    #                     If(Greater(5,4))[
+    #                         If(Equal(2,2))[
+    #                             Mult(10,10);
+    #                             ];
+    #                         ];
+    #                     ];
+    #                     Sum(2,2)
+    #             FIN
+    #             PARA proc02 [12,TRUE]
+    #                 Run [
+    #                     Def id05 = 4;
+    #                     Def id06 = 5;
+    #                     If(Greater(5,4))[
+    #                         If(Equal(2,2))[
+    #                             Mult(20,20);
+    #                             ];
+    #                         ];
+    #                     ];
+    #             FIN
+    #             '''
+    data = '''And(Greater(2,6),Equal(2,2));'''
     lexer.input(data)
     syntactic.parse(lexer)
 
