@@ -8,8 +8,8 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Compiler.Semantic.TypeModels import *
-from Compiler.Semantic.OperationModels import *
+from WritingMachine.Compiler.Semantic.TypeModels import *
+from WritingMachine.Compiler.Semantic.OperationModels import *
 
 
 class Def:

@@ -8,10 +8,10 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Compiler.Syntactic.Comparisons import *
-from Compiler.Syntactic.Atomic import *
-import Compiler.Syntactic.Parser as parser
-from Compiler.Semantic.OperationModels import *
+from Comparisons import *
+from Atomic import *
+import Parser as parser
+from WritingMachine.Compiler.Semantic.OperationModels import *
 
 
 def p_operation_random(p):
