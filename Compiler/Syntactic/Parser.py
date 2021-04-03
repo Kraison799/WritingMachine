@@ -10,25 +10,24 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-import Compiler.ply.yacc as yacc
-from Compiler.Syntactic.Procedures import*
-from Compiler.Lexical.Tokenizer import tokens
-from Compiler.TreeStructure.Node import *
+import WritingMachine.Compiler.ply.yacc as yacc
+from WritingMachine.Compiler.Syntactic.Procedures import*
+from WritingMachine.Compiler.Lexical.Tokenizer import tokens
 
-results = []
-ast = TreeNode("ROOT")
+chain = Chain()
 precedence = (('right', 'UMINUS'),)
-start = 'sequence'
+start = 'structure'
 
 
 def p_structure(p):
     '''structure : COMMENT\
     chain'''
-    p[0] = p[1]
+    p[0] = p[2]
 
 def p_chain(p):
     'chain : procedure chain'
-    p[0] = p[1]
+    chain.chain.insert(0,p[1])
+    p[0] = chain
 
 def p_chain_empty(p):
     'chain :'
@@ -39,7 +38,7 @@ def p_chain_empty(p):
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
-    result.calculate()
+    print(result.chain[0].statements)
 
 
 

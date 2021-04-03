@@ -8,8 +8,8 @@
 # lexical analysis
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Compiler.ply.lex as lex
-import Compiler.Syntactic.Parser as syntactic
+import WritingMachine.Compiler.ply.lex as lex
+import WritingMachine.Compiler.Syntactic.Parser as syntactic
 from Rules import *
 
 
@@ -43,7 +43,37 @@ def lex_test():
     #                     ];
     #             FIN
     #             '''
-    data = '''And(Greater(2,6),Equal(2,2));'''
+    data = '''  --MANDATORY COMMENT
+                PARA proc01 [3,4]
+                Repeat 4[
+                Def id02 = Div(3,5);
+                IfElse(Greater(3,5))
+                  [
+                    Random(4);
+                  ]
+                  [  
+                    Mult(2,2);
+                    If(Equal(2,2))[
+                        Mult(20,20);
+                        Def id02 = 44;
+                        If(Smaller(3,6))[
+                           Sum(3,6);
+                        ];
+                    ];
+                  ];
+                  Sum(4,4);
+                  ];
+                  Run[ Mult(4,4);];
+                  Def id04 = Sum(4,4);
+                  Sum(4,6);
+                    FIN
+                    
+                PARA proc02 []
+                    Def id05 = Mult(2,2);
+                FIN
+                
+                
+              '''
     lexer.input(data)
     syntactic.parse(lexer)
 

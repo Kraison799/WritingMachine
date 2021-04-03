@@ -8,27 +8,34 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Compiler.Syntactic.Parser as parser
-from Compiler.Syntactic.Orders import *
+import WritingMachine.Compiler.Syntactic.Parser as parser
+from WritingMachine.Compiler.Syntactic.Orders import *
+from copy import deepcopy
+from WritingMachine.Compiler.Semantic.ProcedureModels import *
 arguments = []
+statements = []
 
 def p_procedure(p):
     'procedure : Para ID LSQRBRACKET argument RSQRBRACKET statements Fin'
-    args = arguments.copy()
+    args = copy.deepcopy(arguments)
     arguments.clear()
-    node = parser.TreeNode([p[2],args])
-    parser.ast.add_child(node)
-    p[0] = p[1]
+    stats = copy.deepcopy(statements)
+    statements.clear()
+    seq.actions.clear()
+    result = Procedure(p[2], args, stats)
+    p[0] = result
 
 
 def p_statements_01(p):
     'statements : body statements'
-    p[0] = p[1]
+    statements.insert(0,p[1])
+    p[0] = statements
 
 
 def p_statements_02(p):
     'statements : sequence statements'
-    p[0] = p[1]
+    statements.insert(0,p[1])
+    p[0] = statements
 
 
 def p_statements_empty(p):
@@ -38,23 +45,30 @@ def p_statements_empty(p):
 
 def p_body_run(p):
     'body : Run LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
-    p[0] = p[1]
+    sequence = copy.deepcopy(p[3])
+    p[3].actions.clear()
+    result = Run(sequence)
+    p[0] = result
 
 
 def p_body_repeat(p):
     'body : Repeat INTEGER LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
+    sequence = copy.deepcopy(p[4])
+    p[4].actions.clear()
+    result = Repeat(p[2], sequence)
+    p[0] = result
 
 
 def p_argument_simple(p):
     'argument : factor'
-    arguments.append(p[1])
-    p[0] = p[1]
+    arguments.insert(0,p[1])
+    p[0] = arguments
 
 
 def p_argument_multiple(p):
     'argument : factor COMMA argument'
-    arguments.append(p[1])
-    p[0] = p[1]
+    arguments.insert(0,p[1])
+    p[0] = arguments
 
 def p_argument_empty(p):
     'argument :'

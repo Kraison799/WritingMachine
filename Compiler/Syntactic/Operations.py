@@ -8,9 +8,9 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Comparisons import *
-from Atomic import *
-import Parser as parser
+from WritingMachine.Compiler.Syntactic.Comparisons import *
+from WritingMachine.Compiler.Syntactic.Atomic import *
+import WritingMachine.Compiler.Syntactic.Parser as parser
 from WritingMachine.Compiler.Semantic.OperationModels import *
 
 

@@ -10,8 +10,8 @@
 # ------------------------------------------------------------
 
 from random import randint
-from Compiler.Syntactic.Operations import *
-from Compiler.Semantic.ReservedModels import *
+from WritingMachine.Compiler.Syntactic.Operations import *
+from WritingMachine.Compiler.Semantic.ReservedModels import *
 SymbolTable = {'PROC_01': [['id01', int, 2], ['id02', str, "FALSE"], ['id03', int, -10]]}
 # SymbolTable = {}
 CurrentScope = "PROC_01"
@@ -211,18 +211,12 @@ def p_reserved_and_comparison(p):
 
 def p_reserved_or_bool(p):
     'reserved : Or LPAREN bool COMMA bool RPAREN SEMICOLON'
-    if p[3] == "TRUE" or p[5] == "TRUE":
-        p[0] = "TRUE"
-    else:
-        p[0] = "FALSE"
+    p[0] = Or(p[3], p[5])
 
 
 def p_reserved_or_comparison(p):
     'reserved : Or LPAREN comparison COMMA comparison RPAREN SEMICOLON'
-    if p[3] == "TRUE" or p[5] == "TRUE":
-        p[0] = "TRUE"
-    else:
-        p[0] = "FALSE"
+    p[0] = Or(p[3], p[5])
 
 def error_assignment(lineno):
     error_message = "SEMANTIC ERROR in line " + str(lineno) + " Assigned value does not match variable type."

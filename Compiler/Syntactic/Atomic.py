@@ -8,8 +8,8 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Compiler.Syntactic.Parser as parser
-from Compiler.Semantic.TypeModels import *
+import WritingMachine.Compiler.Syntactic.Parser as parser
+from WritingMachine.Compiler.Semantic.TypeModels import *
 
 #BOOLEAN VALUES
 def p_bool_true(p):

@@ -381,3 +381,29 @@ class And:
             else:
                 print("FALSE")
                 return BooleanValue("FALSE")
+
+
+class Or:
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+    def calculate(self):
+        if isinstance(self.x, BooleanValue) and isinstance(self.y, BooleanValue):
+            if self.x.value == "TRUE" or self.y.value == "TRUE":
+                print("TRUE")
+                return BooleanValue("TRUE")
+            else:
+                print("FALSE")
+                return BooleanValue("FALSE")
+        else:
+            first_value = self.x.calculate()
+            second_value = self.y.calculate()
+            if first_value.value == "TRUE" or second_value.value == "TRUE":
+                print("TRUE")
+                return BooleanValue("TRUE")
+            else:
+                print("FALSE")
+                return BooleanValue("FALSE")
