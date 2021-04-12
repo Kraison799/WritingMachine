@@ -60,6 +60,7 @@ reserved = {
     'Power': 'Power',
     'Div': 'Div',
     'Sum': 'Sum',
+    'Global': 'Global',
     'FALSE': 'False',
     'TRUE': 'True',
     'PARA': 'Para',

@@ -8,37 +8,46 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Compiler.Syntactic.Comparisons import *
-from Compiler.Syntactic.Atomic import *
-import Compiler.Syntactic.Parser as parser
+from WritingMachine.Compiler.Syntactic.Comparisons import *
+from WritingMachine.Compiler.Syntactic.Atomic import *
+import WritingMachine.Compiler.Syntactic.Parser as parser
+from WritingMachine.Compiler.Semantic.OperationModels import *
+
+
+def p_operation_random(p):
+    'operation : Random LPAREN INTEGER RPAREN SEMICOLON'
+    line = p.lineno(1)
+    p[0] = Random(p[3], line)
 
 
 def p_operation_sum(p):
-    'operation : Sum LPAREN numerical COMMA numerical RPAREN SEMICOLON'
-    p[0] = p[3] + p[5]
+    'operation : Sum LPAREN operand COMMA operand RPAREN SEMICOLON '
+    line = p.lineno(1)
+    p[0] = Sum(p[3], p[5], line)
 
 
 def p_operation_substr(p):
-    'operation : Substr LPAREN numerical COMMA numerical RPAREN SEMICOLON'
-    p[0] = p[3] - p[5]
+    'operation : Substr LPAREN operand COMMA operand RPAREN SEMICOLON'
+    line = p.lineno(1)
+    p[0] = Substr(p[3], p[5], line)
 
 
 def p_operation_mult(p):
-    'operation : Mult LPAREN numerical COMMA numerical RPAREN SEMICOLON'
-    p[0] = p[3] * p[5]
+    'operation : Mult LPAREN operand COMMA operand RPAREN SEMICOLON'
+    line = p.lineno(1)
+    p[0] = Mult(p[3], p[5], line)
 
 
 def p_operation_div(p):
-    'operation : Div LPAREN numerical COMMA numerical RPAREN SEMICOLON'
-    p[0] = p[3] // p[5]
+    'operation : Div LPAREN operand COMMA operand RPAREN SEMICOLON'
+    line = p.lineno(1)
+    p[0] = Div(p[3], p[5], line)
 
 
 def p_operation_power(p):
-    'operation : Power LPAREN INTEGER COMMA INTEGER RPAREN SEMICOLON'
-    p[0] = p[3] ** p[5]
-
-
-
+    'operation : Power LPAREN operand COMMA operand RPAREN SEMICOLON'
+    line = p.lineno(1)
+    p[0] = Power(p[3], p[5], line)
 
 
 # def p_reserved_random(p):
@@ -414,17 +423,10 @@ def p_operation_power(p):
 # def p_bool_false(p):
 #     'bool : False'
 #     p[0] = p[1]
-
-
 # def p_sequence_empty(p):
 #     'sequence :'
 #     pass
 #
 
 
-# Error rule for syntax errors
-def p_error(p):
-    if p:
-        error_message = "Syntax error in line: " + str(p.lineno)
-        print(error_message)
 

@@ -9,14 +9,14 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
+import WritingMachine.Compiler.ply.yacc as yacc
+from WritingMachine.Compiler.Syntactic.Procedures import*
+from WritingMachine.Compiler.Lexical.Tokenizer import tokens
+from WritingMachine.Compiler.Semantic.Evaluator import *
 
-import Compiler.ply.yacc as yacc
-from Compiler.Syntactic.Procedures import*
-from Compiler.Lexical.Tokenizer import tokens
-from Compiler.TreeStructure.Node import TreeNode
-
-results = []
-ast = TreeNode("ROOT")
+symbol_table = {}
+current_scope = None
+chain = Chain()
 precedence = (('right', 'UMINUS'),)
 start = 'structure'
 
@@ -24,11 +24,14 @@ start = 'structure'
 def p_structure(p):
     '''structure : COMMENT\
     chain'''
-    p[0] = p[1]
+    p[0] = p[2]
+
 
 def p_chain(p):
     'chain : procedure chain'
-    p[0] = p[1]
+    chain.chain.insert(0,p[1])
+    p[0] = chain
+
 
 def p_chain_empty(p):
     'chain :'
@@ -39,9 +42,14 @@ def p_chain_empty(p):
 def parse(lex):
     parser = yacc.yacc()
     result = parser.parse(lexer=lex)
-    print(result)
-    print(results)
-    print(ast.children[0].value,ast.children[1].value)
+    print(result.chain[1].statements[1].sequence.actions)
+    semantic = Evaluate(result)
+    semantic.start()
+
+
+
+
+
 
 
 

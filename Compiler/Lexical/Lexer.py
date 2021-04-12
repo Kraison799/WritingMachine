@@ -8,9 +8,9 @@
 # lexical analysis
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-import Compiler.ply.lex as lex
-import Compiler.Syntactic.Parser as syntactic
-from Compiler.Lexical.Rules import *
+import WritingMachine.Compiler.ply.lex as lex
+import WritingMachine.Compiler.Syntactic.Parser as syntactic
+from Rules import *
 
 
 
@@ -20,8 +20,8 @@ def lex_test(codeEditor):
     lexer = lex.lex()
     data = codeEditor.toPlainText()
 
-    lexer.input(data)
     syntactic.parse(lexer)
+
 
     # while True:
     #     tok = lexer.token()
