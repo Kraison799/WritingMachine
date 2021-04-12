@@ -1,11 +1,11 @@
 import sys
 import copy
-from WritingMachine.Compiler.Semantic.OrderModels import Sequence, Def, WritingIf, WritingIfElse, WritingWhile
-from WritingMachine.Compiler.Semantic.ProcedureModels import Chain, Procedure, Repeat, Run
-from WritingMachine.Compiler.Semantic.ReservedModels import Put, AddSimple, AddInt, ContinueUp, ContinueDown, \
-    ContinueLeft, ContinueRight
-from WritingMachine.Compiler.Syntactic import Parser as parser
-from WritingMachine.Compiler.Semantic.SemanticError import SemanticError
+from Compiler.Semantic.OrderModels import Sequence, Def, WritingIf, WritingIfElse, WritingWhile
+from Compiler.Semantic.ProcedureModels import Chain, Procedure, Repeat, Run
+from Compiler.Semantic.ReservedModels import Put, AddSimple, AddInt, ContinueUp, ContinueDown, \
+    ContinueLeft, ContinueRight, Pos, PosX, PosY, Up, Down, Speed, Begin
+from Compiler.Syntactic import Parser as parser
+from Compiler.Semantic.SemanticError import SemanticError
 
 
 
@@ -140,8 +140,26 @@ class Evaluate:
         if isinstance(element, ContinueRight):
             solve = element.calculate()
 
+        if isinstance(element, Pos):
+            solve = element.calculate()
 
+        if isinstance(element, PosX):
+            solve = element.calculate()
 
+        if isinstance(element, PosY):
+            solve = element.calculate()
+
+        if isinstance(element, Up):
+            solve = element.calculate()
+
+        if isinstance(element, Down):
+            solve = element.calculate()
+
+        if isinstance(element, Begin):
+            solve = element.calculate()
+
+        if isinstance(element, Speed):
+            solve = element.calculate()
 
 
 

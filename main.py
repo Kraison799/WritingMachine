@@ -147,19 +147,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             ###mb.showinfo("Ocurrio un error, asegurese de haber cargado un archivo previamente")
 
 
-    def Compile_start(self):
-        ###Funcion para compilar
-        print("compilado")
-
     def On_compile_click(self):
+        ###Llamado de la compilacion y recibe la respuesta del compilador
 
-        ###Llamado de la compilacion y recibe la respuesta del compilador desde la funcion compile_start
+        gt = gcode()
+        gt.limpiar()
 
         if Lexer.lex_test(codeEditor):
             print("OK")
         else:
             errors = ErrorLog()
             self.errores.clear()
+            self.errores.setStyleSheet("QPlainTextEdit { color: red}")
             self.errores.insertPlainText(errors.log)
             errors.log = ""
 

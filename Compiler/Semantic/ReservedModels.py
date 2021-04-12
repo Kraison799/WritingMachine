@@ -8,10 +8,12 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from WritingMachine.Compiler.Semantic.SemanticError import SemanticError
-from WritingMachine.Compiler.Semantic.TypeModels import *
-from WritingMachine.Compiler.Semantic.OperationModels import *
-from WritingMachine.Compiler.Syntactic import Parser as parser
+from Compiler.Gcode import gcode
+from Compiler.Semantic.SemanticError import SemanticError
+from Compiler.Semantic.TypeModels import *
+from Compiler.Semantic.OperationModels import *
+from Compiler.Syntactic import Parser as parser
+
 
 
 class Def:
@@ -323,46 +325,62 @@ class ContinueUp:
         if isinstance(self.value, int):
             if self.value > 0:
                 print("Continue up: " + str(self.value))
+                gt = gcode()
+                gt.moverypositivo(self.value)
                 return ["Y", self.value]
 
         elif isinstance(self.value, str):
             print("Continue up: " + str(self.get_var(self.value)))
+            gt = gcode()
+            gt.moverypositivo(self.get_var(self.value))
 
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
             if sumResult > 0:
                 print("Continue up: " + str(sumResult))
+                gt = gcode()
+                gt.moverypositivo(sumResult)
                 return ["Y", sumResult]
 
         elif isinstance(self.value, Substr):
             subsResult = self.value.calculate()
             if subsResult > 0:
                 print("Continue up: " + str(subsResult))
+                gt = gcode()
+                gt.moverypositivo(subsResult)
                 return ["Y", subsResult]
 
         elif isinstance(self.value, Mult):
             multResult = self.value.calculate()
             if multResult > 0:
                 print("Continue up: " + str(multResult))
+                gt = gcode()
+                gt.moverypositivo(multResult)
                 return ["Y", multResult]
 
         elif isinstance(self.value, Div):
             divResult = self.value.calculate()
             if divResult > 0:
                 print("Continue up: " + str(divResult))
+                gt = gcode()
+                gt.moverypositivo(divResult)
                 return ["Y", divResult]
 
         elif isinstance(self.value, Random):
             randResult = self.value.calculate()
             if randResult > 0:
                 print("Continue up: " + str(randResult))
+                gt = gcode()
+                gt.moverypositivo(randResult)
                 return ["Y", randResult]
 
         elif isinstance(self.value, Power):
             powResult = self.value.calculate()
             if powResult > 0:
                 print("Continue up: " + str(powResult))
+                gt = gcode()
+                gt.moverypositivo(powResult)
                 return ["Y", powResult]
 
         else:
@@ -423,45 +441,61 @@ class ContinueDown:
         if isinstance(self.value, int):
             if self.value > 0:
                 print("Continue down: " + str(self.value * -1))
+                gt = gcode()
+                gt.moverynegativo(self.value)
                 return ["Y", self.value * -1]
 
         elif isinstance(self.value, str):
             print("Continue down: " + str(self.get_var(self.value)))
+            gt = gcode()
+            gt.moverynegativo(self.get_var(self.value))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
             if sumResult > 0:
                 print("Continue down: " + str(sumResult * -1))
+                gt = gcode()
+                gt.moverynegativo(sumResult)
                 return ["Y", sumResult * -1]
 
         elif isinstance(self.value, Substr):
             subsResult = self.value.calculate()
             if subsResult > 0:
                 print("Continue down: " + str(subsResult * -1))
+                gt = gcode()
+                gt.moverynegativo(subsResult)
                 return ["Y", subsResult * -1]
 
         elif isinstance(self.value, Mult):
             multResult = self.value.calculate()
             if multResult > 0:
                 print("Continue down: " + str(multResult * -1))
+                gt = gcode()
+                gt.moverynegativo(multResult)
                 return ["Y", multResult * -1]
 
         elif isinstance(self.value, Div):
             divResult = self.value.calculate()
             if divResult > 0:
                 print("Continue down: " + str(divResult * -1))
+                gt = gcode()
+                gt.moverynegativo(divResult)
                 return ["Y", divResult * -1]
 
         elif isinstance(self.value, Random):
             randResult = self.value.calculate()
             if randResult > 0:
                 print("Continue down: " + str(randResult * -1))
+                gt = gcode()
+                gt.moverynegativo(randResult)
                 return ["Y", randResult * -1]
 
         elif isinstance(self.value, Power):
             powResult = self.value.calculate()
             if powResult > 0:
                 print("Continue down: " + str(powResult * -1))
+                gt = gcode()
+                gt.moverynegativo(powResult)
                 return ["Y", powResult * -1]
 
         else:
@@ -500,45 +534,61 @@ class ContinueLeft:
         if isinstance(self.value, int):
             if self.value > 0:
                 print("Continue left: " + str(self.value * -1))
+                gt = gcode()
+                gt.moverXnegativo(self.value)
                 return ["X", self.value * -1]
 
         elif isinstance(self.value, str):
             print("Continue left: " + str(self.get_var(self.value)))
+            gt = gcode()
+            gt.moverXnegativo(self.get_var(self.value))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
             if sumResult > 0:
                 print("Continue left: " + str(sumResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(sumResult)
                 return ["X", sumResult * -1]
 
         elif isinstance(self.value, Substr):
             subsResult = self.value.calculate()
             if subsResult > 0:
                 print("Continue left: " + str(subsResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(subsResult)
                 return ["X", subsResult * -1]
 
         elif isinstance(self.value, Mult):
             multResult = self.value.calculate()
             if multResult > 0:
                 print("Continue left: " + str(multResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(multResult)
                 return ["X", multResult * -1]
 
         elif isinstance(self.value, Div):
             divResult = self.value.calculate()
             if divResult > 0:
                 print("Continue left: " + str(divResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(divResult)
                 return ["X", divResult * -1]
 
         elif isinstance(self.value, Random):
             randResult = self.value.calculate()
             if randResult > 0:
                 print("Continue left: " + str(randResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(randResult)
                 return ["X", randResult * -1]
 
         elif isinstance(self.value, Power):
             powResult = self.value.calculate()
             if powResult > 0:
                 print("Continue left: " + str(powResult * -1))
+                gt = gcode()
+                gt.moverXnegativo(powResult)
                 return ["X", powResult * -1]
 
         else:
@@ -578,45 +628,61 @@ class ContinueRight:
         if isinstance(self.value, int):
             if self.value > 0:
                 print("Continue right: " + str(self.value))
+                gt = gcode()
+                gt.moverXpositivo(self.value)
                 return ["X", self.value]
 
         elif isinstance(self.value, str):
             print("Continue right: " + str(self.get_var(self.value)))
+            gt = gcode()
+            gt.moverXpositivo(self.get_var(self.value))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
             if sumResult > 0:
                 print("Continue right: " + str(sumResult))
+                gt = gcode()
+                gt.moverXpositivo(sumResult)
                 return ["X", sumResult]
 
         elif isinstance(self.value, Substr):
             subsResult = self.value.calculate()
             if subsResult > 0:
                 print("Continue right: " + str(subsResult))
+                gt = gcode()
+                gt.moverXpositivo(subsResult)
                 return ["X", subsResult]
 
         elif isinstance(self.value, Mult):
             multResult = self.value.calculate()
             if multResult > 0:
                 print("Continue right: " + str(multResult))
+                gt = gcode()
+                gt.moverXpositivo(multResult)
                 return ["X", multResult]
 
         elif isinstance(self.value, Div):
             divResult = self.value.calculate()
             if divResult > 0:
                 print("Continue right: " + str(divResult))
+                gt = gcode()
+                gt.moverXpositivo(divResult)
                 return ["X", divResult]
 
         elif isinstance(self.value, Random):
             randResult = self.value.calculate()
             if randResult > 0:
                 print("Continue right: " + str(randResult))
+                gt = gcode()
+                gt.moverXpositivo(randResult)
                 return ["X", randResult]
 
         elif isinstance(self.value, Power):
             powResult = self.value.calculate()
             if powResult > 0:
                 print("Continue right: " + str(powResult))
+                gt = gcode()
+                gt.moverXpositivo(powResult)
                 return ["X", powResult]
 
         else:
@@ -629,6 +695,8 @@ class Up:
     def calculate(self):
         result = ["u"]
         print("UP")
+        gt = gcode()
+        gt.subir()
         return result
 
 
@@ -637,6 +705,8 @@ class Down:
     def calculate(self):
         result = ["d"]
         print("DOWN")
+        gt = gcode()
+        gt.bajar()
         return result
 
 
@@ -649,6 +719,8 @@ class Pos:
     def calculate(self):
         result = ["Pos", self.x, self.y]
         print(result)
+        gt = gcode()
+        gt.posxy(self.x,self.y)
         return result
 
 
@@ -660,6 +732,8 @@ class PosX:
     def calculate(self):
         result = ["X", self.x]
         print(result)
+        gt = gcode()
+        gt.posx(self.x)
         return result
 
 
@@ -671,6 +745,8 @@ class PosY:
     def calculate(self):
         result = ["Y", self.x]
         print(result)
+        gt = gcode()
+        gt.posy(self.x)
         return result
 
 
@@ -699,6 +775,8 @@ class Begin:
 
     def calculate(self):
         print([1, 1])
+        gt = gcode()
+        gt.puntosIniciales()
         return [1, 1]
 
 class Speed:
@@ -709,6 +787,8 @@ class Speed:
 
     def calculate(self):
         print(["Speed", self.x])
+        gt = gcode()
+        gt.velocidad(self.x)
         return ["Speed", self.x]
 
 
