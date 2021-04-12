@@ -19,19 +19,5 @@ from WritingMachine.Compiler.Lexical.Rules import *
 def lex_test(codeEditor):
     lexer = lex.lex()
     data = codeEditor.toPlainText()
-
-    syntactic.parse(lexer)
-
-
-    # while True:
-    #     tok = lexer.token()
-    #     if not tok:
-    #         break
-    #     print(tok)
-    # print("---END OF TOKENS---")
-
-
-"""
-if __name__ == '__main__':
-    lex_test()
-"""
+    lexer.input(data)
+    syntactic.build(lexer)

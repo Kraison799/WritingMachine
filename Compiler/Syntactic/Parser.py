@@ -19,6 +19,10 @@ current_scope = None
 chain = Chain()
 precedence = (('right', 'UMINUS'),)
 start = 'structure'
+syntax_err = False
+
+
+
 
 
 def p_structure(p):
@@ -38,13 +42,16 @@ def p_chain_empty(p):
     pass
 
 
+syntactic = yacc.yacc()
+
 # Build the parser
-def parse(lex):
-    parser = yacc.yacc()
-    result = parser.parse(lexer=lex)
-    print(result.chain[1].statements[1].sequence.actions)
-    semantic = Evaluate(result)
-    semantic.start()
+def build(lex):
+
+    result = syntactic.parse(lexer=lex)
+    if not syntax_err:
+        print(result.chain[1].statements[1].sequence.actions)
+        semantic = Evaluate(result)
+        semantic.start()
 
 
 

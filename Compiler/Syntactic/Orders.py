@@ -57,10 +57,6 @@ def p_order_conditional(p):
     'order : conditional'
     p[0] = p[1]
 
-# Loop orders
-def p_order_loop(p):
-    'order : loop'
-
 def p_order_loop(p):
     'order : loop'
     p[0] = p[1]

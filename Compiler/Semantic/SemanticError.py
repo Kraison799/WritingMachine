@@ -30,10 +30,10 @@ class SemanticError:
             sys.exit(1)
         if self.code == 6:
             print("SEMANTIC ERROR IN LINE " + str(self.line) + ": VARIABLE DOES NOT EXIST")
-            sys.exit(1)
+            # sys.exit(1)
         if self.code == 7:
             print("SEMANTIC ERROR IN LINE " + str(self.line) + ": GLOBAL VARIABLE DOES NOT EXIST")
-            sys.exit(1)
+            # sys.exit(1)
         if self.code == 8:
             print("SEMANTIC ERROR IN LINE " + str(self.line) + ": MAXIMUM RECURSION EXCEEDED")
             sys.exit(1)

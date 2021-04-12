@@ -9,10 +9,13 @@
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
 
-from Compiler.Lexical.Tokenizer import *
+from WritingMachine.Compiler.Lexical.Tokenizer import *
 
 
 # Define a rule so we can track line numbers
+from WritingMachine.Compiler.Lexical.Tokenizer import reserved
+
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
