@@ -10,7 +10,7 @@
 # ------------------------------------------------------------
 import WritingMachine.Compiler.ply.lex as lex
 import WritingMachine.Compiler.Syntactic.Parser as syntactic
-from Rules import *
+from WritingMachine.Compiler.Lexical.Rules import *
 
 
 
