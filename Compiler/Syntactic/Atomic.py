@@ -44,9 +44,22 @@ def p_factor_bool(p):
     'factor : bool'
     p[0] = p[1]
 
+def p_operand_num(p):
+    'operand : numerical'
+    p[0] = p[1]
+
+def p_operand_id(p):
+    'operand : ID'
+    p[0] = p[1]
 
 # Error rule for syntax errors
 def p_error(p):
+
     if p:
         error_message = "Syntax error in line: " + str(p.lineno)
         print(error_message)
+
+    if p.value == "PARA":
+        error_message = "SYNTAX ERROR IN LINE " + str(p.lineno)+": NO INITIAL COMMENT"
+        print(error_message)
+

@@ -8,54 +8,316 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
+from WritingMachine.Compiler.Semantic.SemanticError import SemanticError
 from WritingMachine.Compiler.Semantic.TypeModels import *
 from WritingMachine.Compiler.Semantic.OperationModels import *
+from WritingMachine.Compiler.Syntactic import Parser as parser
 
 
 class Def:
-    def __init__(self, id, value):
+    def __init__(self, id, value, line):
         self.id = id
         self.value = value
+        self.line = line
 
     def calculate(self):
+
         if isinstance(self.value, BooleanValue):
-            # SYMBOL TABLE LOGIC
-            print(self.id, self.value.value)
+            if self.value.value == "TRUE":
+                self.value = True
+            else:
+                self.value = False
+            return [self.id, bool, self.value]
+
         if isinstance(self.value, int):
-            print(self.id, self.value)
+            return [self.id, int, self.value]
 
         if isinstance(self.value, str):
-            print(self.id, self.value)
-            # Possible pointer management
+            value = None
+            var_type = None
+            for variable in parser.symbol_table[parser.current_scope]:
+                if self.value in variable:
+                    value = variable[2]
+                    var_type = variable[1]
+                    break
+            if value:
+                return [self.id, var_type, value]
+            else:
+                for variable in parser.symbol_table["main"]:
+                    if self.value in variable:
+                        value = variable[2]
+                        var_type = variable[1]
+                        break
+                if value:
+                    return [self.id, var_type, value]
+                else:
+                    error = SemanticError(4)
+                    error.process()
+
+
 
         if isinstance(self.value, Sum):
             sumResult = self.value.calculate()
-            print(self.id, sumResult)
+            return [self.id, int, sumResult]
 
         if isinstance(self.value, Substr):
             subsResult = self.value.calculate()
-            print(self.id, subsResult)
+            return [self.id, int, subsResult]
 
         if isinstance(self.value, Mult):
             multResult = self.value.calculate()
-            print(self.id, multResult)
+            return [self.id, int, multResult]
 
         if isinstance(self.value, Div):
             divResult = self.value.calculate()
-            print(self.id, divResult)
+            return [self.id, int, divResult]
 
         if isinstance(self.value, Random):
             randResult = self.value.calculate()
-            print(self.id, randResult)
+            return [self.id, int, randResult]
 
         if isinstance(self.value, Power):
             powResult = self.value.calculate()
-            print(self.id, powResult)
+            return [self.id, int, powResult]
+
+
+
+class Put:
+    def __init__(self, id, value, line, glovar = False):
+        self.id = id
+        self.value = value
+        self.line = line
+        self.glovar = glovar
+
+    def calculate(self):
+        found = False
+        if isinstance(self.value, BooleanValue):
+            if self.value.value == "TRUE":
+                self.value = True
+            else:
+                self.value = False
+
+            if self.glovar:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        found = True
+                        if variable[1] == bool:
+                            variable[2] = self.value
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(7, self.line)
+                    error.process()
+
+            for variable in parser.symbol_table[parser.current_scope]:
+                if self.id == variable[0]:
+                    found = True
+                    if variable[1] == bool:
+                        variable[2] = self.value
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        found = True
+                        if variable[1] == bool:
+                            variable[2] = self.value
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(6, self.line)
+                    error.process()
+
+        if isinstance(self.value, int):
+
+            if self.glovar:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        found = True
+                        if variable[1] == int:
+                            variable[2] = self.value
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(7, self.line)
+                    error.process()
+
+            for variable in parser.symbol_table[parser.current_scope]:
+                if self.id == variable[0]:
+                    found = True
+                    if variable[1] == int:
+                        variable[2] = self.value
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        found = True
+                        if variable[1] == int:
+                            variable[2] = self.value
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(6, self.line)
+                    error.process()
+
+        if isinstance(self.value, Sum):
+            sumResult = self.value.calculate()
+            self.value = sumResult
+            self.calculate()
+
+        if isinstance(self.value, Substr):
+            subsResult = self.value.calculate()
+            self.value = subsResult
+            self.calculate()
+
+        if isinstance(self.value, Mult):
+            multResult = self.value.calculate()
+            self.value = multResult
+            self.calculate()
+
+        if isinstance(self.value, Div):
+            divResult = self.value.calculate()
+            self.value = divResult
+            self.calculate()
+
+        if isinstance(self.value, Random):
+            randResult = self.value.calculate()
+            self.value = randResult
+            self.calculate()
+
+        if isinstance(self.value, Power):
+            powResult = self.value.calculate()
+            self.value = powResult
+            self.calculate()
+
+
+class AddSimple:
+    def __init__(self, id, line, glovar = False):
+        self.id = id
+        self.line = line
+        self.glovar = glovar
+
+    def calculate(self):
+        found = False
+        if self.glovar:
+            for variable in parser.symbol_table["main"]:
+                if self.id == variable[0]:
+                    if variable[1] == int:
+                        variable[2] += 1
+                        found = True
+                        break
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                error = SemanticError(7, self.line)
+                error.process()
+        else:
+            for variable in parser.symbol_table[parser.current_scope]:
+                if self.id == variable[0]:
+                    if variable[1] == int:
+                        variable[2] += 1
+                        found = True
+                        break
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        if variable[1] == int:
+                            variable[2] += 1
+                            found = True
+                            break
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(7, self.line)
+                    error.process()
+
+class AddInt:
+    def __init__(self, id, value, line, glovar = False):
+        self.id = id
+        self.value = value
+        self.line = line
+        self.glovar = glovar
+
+    def calculate(self):
+        found = False
+        if self.glovar:
+            for variable in parser.symbol_table["main"]:
+                if self.id == variable[0]:
+                    if variable[1] == int:
+                        variable[2] += self.value
+                        found = True
+                        break
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                error = SemanticError(7, self.line)
+                error.process()
+        else:
+            for variable in parser.symbol_table[parser.current_scope]:
+                if self.id == variable[0]:
+                    if variable[1] == int:
+                        variable[2] += self.value
+                        found = True
+                        break
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if found:
+                return
+            else:
+                for variable in parser.symbol_table["main"]:
+                    if self.id == variable[0]:
+                        if variable[1] == int:
+                            variable[2] += self.value
+                            found = True
+                            break
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if found:
+                    return
+                else:
+                    error = SemanticError(7, self.line)
+                    error.process()
 
 
 class ContinueUp:
-    def __init__(self, x):
+    def __init__(self, x, line):
         self.value = x
+        self.line = line
 
     def calculate(self):
         if isinstance(self.value, int):
@@ -64,7 +326,8 @@ class ContinueUp:
                 return ["Y", self.value]
 
         elif isinstance(self.value, str):
-            print("Continue up: " + self.value)
+            print("Continue up: " + str(self.get_var(self.value)))
+
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
@@ -106,10 +369,55 @@ class ContinueUp:
             print("Err: Invalid input")
             return None
 
+    def get_var(self, id):
+        found = False
+
+        for variable in parser.symbol_table[parser.current_scope]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+
+        for variable in parser.symbol_table["main"]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+        if not found:
+            error = SemanticError(6, self.line)
+            error.process()
+
 
 class ContinueDown:
-    def __init__(self, x):
+    def __init__(self, x, line):
         self.value = x
+        self.line = line
+
+    def get_var(self, id):
+        found = False
+
+        for variable in parser.symbol_table[parser.current_scope]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+
+        for variable in parser.symbol_table["main"]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+        if not found:
+            error = SemanticError(6, self.line)
+            error.process()
 
     def calculate(self):
         if isinstance(self.value, int):
@@ -118,7 +426,7 @@ class ContinueDown:
                 return ["Y", self.value * -1]
 
         elif isinstance(self.value, str):
-            print("Continue down: " + self.value)
+            print("Continue down: " + str(self.get_var(self.value)))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
@@ -162,8 +470,31 @@ class ContinueDown:
 
 
 class ContinueLeft:
-    def __init__(self, x):
+    def __init__(self, x, line):
         self.value = x
+        self.line = line
+
+    def get_var(self, id):
+        found = False
+
+        for variable in parser.symbol_table[parser.current_scope]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+
+        for variable in parser.symbol_table["main"]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+        if not found:
+            error = SemanticError(6, self.line)
+            error.process()
 
     def calculate(self):
         if isinstance(self.value, int):
@@ -172,7 +503,7 @@ class ContinueLeft:
                 return ["X", self.value * -1]
 
         elif isinstance(self.value, str):
-            print("Continue left: " + self.value)
+            print("Continue left: " + str(self.get_var(self.value)))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()
@@ -216,8 +547,32 @@ class ContinueLeft:
 
 
 class ContinueRight:
-    def __init__(self, x):
+    def __init__(self, x, line):
         self.value = x
+        self.line = line
+
+    def get_var(self, id):
+        found = False
+
+        for variable in parser.symbol_table[parser.current_scope]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+
+        for variable in parser.symbol_table["main"]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+        if not found:
+            error = SemanticError(6, self.line)
+            error.process()
+
 
     def calculate(self):
         if isinstance(self.value, int):
@@ -226,7 +581,7 @@ class ContinueRight:
                 return ["X", self.value]
 
         elif isinstance(self.value, str):
-            print("Continue right: " + self.value)
+            print("Continue right: " + str(self.get_var(self.value)))
 
         elif isinstance(self.value, Sum):
             sumResult = self.value.calculate()

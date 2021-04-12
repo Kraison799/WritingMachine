@@ -44,29 +44,30 @@ def p_statements_empty(p):
 
 
 def p_body_run(p):
-    'body : Run LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
-    sequence = copy.deepcopy(p[3])
-    p[3].actions.clear()
+    'body : Run LSQRBRACKET body_seq RSQRBRACKET SEMICOLON'
+    sequence = copy.deepcopy(body_seq)
+    body_seq.actions.clear()
     result = Run(sequence)
     p[0] = result
 
 
 def p_body_repeat(p):
-    'body : Repeat INTEGER LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
-    sequence = copy.deepcopy(p[4])
-    p[4].actions.clear()
-    result = Repeat(p[2], sequence)
+    'body : Repeat INTEGER LSQRBRACKET body_seq RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
+    sequence = copy.deepcopy(body_seq)
+    body_seq.actions.clear()
+    result = Repeat(p[2], sequence, line)
     p[0] = result
 
 
 def p_argument_simple(p):
-    'argument : factor'
+    'argument : ID'
     arguments.insert(0,p[1])
     p[0] = arguments
 
 
 def p_argument_multiple(p):
-    'argument : factor COMMA argument'
+    'argument : ID COMMA argument'
     arguments.insert(0,p[1])
     p[0] = arguments
 

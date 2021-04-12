@@ -15,6 +15,7 @@ import copy
 seq = Sequence()
 else_seq = Sequence()
 if_seq = Sequence()
+body_seq = Sequence()
 
 
 
@@ -36,6 +37,11 @@ def p_sequence_else(p):
     else_seq.append_action(p[1])
     p[0] = else_seq
 
+def p_body_seq(p):
+    'body_seq : order body_seq'
+    body_seq.append_action(p[1])
+    p[0] = body_seq
+
 # Singular orders
 def p_order_reserved(p):
     'order : reserved'
@@ -52,22 +58,41 @@ def p_order_conditional(p):
     p[0] = p[1]
 
 
+def p_order_loop(p):
+    'order : loop'
+    p[0] = p[1]
+
+
 def p_conditional_if(p):
     'conditional : If LPAREN comparison RPAREN LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
     inner_sequence = copy.deepcopy(seq)
     seq.actions.clear()
-    p[0] = WritingIf(p[3], inner_sequence)
-
+    p[0] = WritingIf(p[3], inner_sequence, line)
 
 
 def p_conditional_ifelse(p):
     'conditional : IfElse LPAREN comparison RPAREN LSQRBRACKET sequence_if RSQRBRACKET LSQRBRACKET sequence_else RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
     if_sequence = copy.deepcopy(if_seq)
     if_seq.actions.clear()
     else_sequence = copy.deepcopy(else_seq)
     else_seq.actions.clear()
-    p[0] = WritingIfElse(p[3], if_sequence, else_sequence)
+    p[0] = WritingIfElse(p[3], if_sequence, else_sequence, line)
 
+
+def p_loop_while(p):
+    'loop : While LSQRBRACKET comparison RSQRBRACKET LSQRBRACKET sequence RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
+    inner_sequence = copy.deepcopy(seq)
+    seq.actions.clear()
+    p[0] = WritingWhile(p[3], inner_sequence, line, 0)
+
+def p_loop_until(p):
+    'loop : Until LSQRBRACKET sequence RSQRBRACKET LSQRBRACKET comparison RSQRBRACKET SEMICOLON'
+    inner_sequence = copy.deepcopy(seq)
+    seq.actions.clear()
+    p[0] = Until(p[6], inner_sequence)
 
 # Empty productions
 def p_sequence_empty(p):
@@ -82,6 +107,10 @@ def p_sequence_else_empty(p):
 
 def p_sequence_if_empty(p):
     'sequence_if :'
+    pass
+
+def p_body_seq_empty(p):
+    'body_seq :'
     pass
 
 

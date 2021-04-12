@@ -19,61 +19,48 @@ CurrentScope = "PROC_01"
 
 def p_reserved_def(p):
     '''reserved : Def ID ASSIGN factor SEMICOLON
-                | Def ID ASSIGN operation'''
-    p[0] = Def(p[2], p[4])
-
-
+                | Def ID ASSIGN operation
+                | Def ID ASSIGN ID SEMICOLON
+                '''
+    line = p.lineno(2)
+    p[0] = Def(p[2], p[4], line)
 
 
 def p_reserved_put(p):
-    'reserved : Put ID ASSIGN factor SEMICOLON'
+    '''reserved : Put ID ASSIGN factor SEMICOLON
+                | Put ID ASSIGN operation'''
     line = p.lineno(2)
-    for id_list in SymbolTable[CurrentScope]:
-        if id_list[0] == p[2]:
-            if type(p[4]) == id_list[1]:
-                id_list[2] = p[4]
-                p[0] = SymbolTable[CurrentScope]
-            else:
-                error_assignment(line)
+    p[0] = Put(p[2], p[4], line)
 
-
-def p_reserved_put_operation(p):
-    'reserved : Put ID ASSIGN operation'
+def p_reserved_put_global(p):
+    '''reserved : Put Global ID ASSIGN factor SEMICOLON
+                | Put Global ID ASSIGN operation'''
     line = p.lineno(2)
-    for id_list in SymbolTable[CurrentScope]:
-        if id_list[0] == p[2]:
-            if type(p[4]) == id_list[1]:
-                id_list[2] = p[4]
-                p[0] = SymbolTable[CurrentScope]
-            else:
-                error_assignment(line)
+    p[0] = Put(p[3], p[5], line, True)
 
 
 def p_reserved_add_simple(p):
     'reserved : Add LSQRBRACKET ID RSQRBRACKET SEMICOLON'
-    line = p.lineno(2)
-    for id_list in SymbolTable[CurrentScope]:
-        if id_list[0] == p[3]:
-            if id_list[1] == int:
-                id_list[2] += 1
-                p[0] = SymbolTable[CurrentScope]
-            else:
-                error_assignment(line)
+    line = p.lineno(1)
+    p[0] = AddSimple(p[3], line)
+
+
+def p_reserved_add_simple_global(p):
+    'reserved : Add LSQRBRACKET Global ID RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
+    p[0] = AddSimple(p[4], line, True)
 
 
 def p_reserved_add_int(p):
     'reserved : Add LSQRBRACKET ID numerical RSQRBRACKET SEMICOLON'
-    line = p.lineno(2)
-    if p[4] < 0:
-        print('Add toma unicamente valores positivos')
-    else:
-        for id_list in SymbolTable[CurrentScope]:
-            if id_list[0] == p[3]:
-                if id_list[1] == int:
-                    id_list[2] += p[4]
-                    p[0] = SymbolTable[CurrentScope]
-                else:
-                    error_assignment(line)
+    line = p.lineno(1)
+    p[0] = AddInt(p[3], p[4], line)
+
+
+def p_reserved_add_int_global(p):
+    'reserved : Add LSQRBRACKET Global ID numerical RSQRBRACKET SEMICOLON'
+    line = p.lineno(1)
+    p[0] = AddInt(p[4], p[5], line, True)
 
 
 def p_reserved_add_variable(p):
@@ -98,65 +85,74 @@ def p_reserved_add_variable(p):
 
 def p_reserved_continueup_units(p):
     'reserved : ContinueUp numerical SEMICOLON'
-    p[0] = ContinueUp(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueUp(p[2], line)
 
 
 def p_reserved_continueup_operation(p):
     'reserved : ContinueUp operation'
-    p[0] = ContinueUp(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueUp(p[2], line)
 
 
 def p_reserved_continueup_variable(p):
     'reserved : ContinueUp ID SEMICOLON'
-    line = p.lineno(2)
-    p[0] = ContinueUp(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueUp(p[2], line)
 
 
 def p_reserved_continuedown_units(p):
     'reserved : ContinueDown numerical SEMICOLON'
-    p[0] = ContinueDown(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueDown(p[2], line)
 
 
 def p_reserved_continuedown_operation(p):
     'reserved : ContinueDown operation'
-    p[0] = ContinueDown(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueDown(p[2], line)
 
 
 def p_reserved_continuedown_variable(p):
     'reserved : ContinueDown ID SEMICOLON'
-    line = p.lineno(2)
-    p[0] = ContinueDown(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueDown(p[2], line)
 
 
 def p_reserved_continueleft_units(p):
     'reserved : ContinueLeft numerical SEMICOLON'
-    p[0] = ContinueLeft(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueLeft(p[2], line)
 
 
 def p_reserved_continueleft_operation(p):
     'reserved : ContinueLeft operation'
-    p[0] = ContinueLeft(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueLeft(p[2], line)
 
 
 def p_reserved_continueleft_variable(p):
     'reserved : ContinueLeft ID SEMICOLON'
-    line = p.lineno(2)
-    p[0] = ContinueLeft(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueLeft(p[2], line)
 
 
 def p_reserved_continueright_units(p):
     'reserved : ContinueRight numerical SEMICOLON'
-    p[0] = ContinueRight(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueRight(p[2], line)
 
 
 def p_reserved_continueright_operation(p):
     'reserved : ContinueRight operation'
-    p[0] = ContinueRight(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueRight(p[2], line)
 
 
 def p_reserved_continueright_variable(p):
     'reserved : ContinueRight ID SEMICOLON'
-    p[0] = ContinueRight(p[2])
+    line = p.lineno(1)
+    p[0] = ContinueRight(p[2], line)
 
 
 def p_reserved_up(p):
