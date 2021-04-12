@@ -20,6 +20,7 @@ chain = Chain()
 precedence = (('right', 'UMINUS'),)
 start = 'structure'
 syntax_err = False
+Err_log = ""
 
 
 

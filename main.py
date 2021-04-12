@@ -12,6 +12,7 @@ from tkinter import messagebox as mb
 import tkinter as tk
 
 import Compiler.Lexical.Lexer as Lexer
+from WritingMachine.Compiler.ErrorLog import ErrorLog
 
 qtCreatorFile = "IDE.ui"
 
@@ -153,10 +154,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def On_compile_click(self):
 
         ###Llamado de la compilacion y recibe la respuesta del compilador desde la funcion compile_start
-        respuesta = "El codigo se compilo correctamente"
 
-        self.errores.clear()
-        self.errores.insertPlainText(respuesta)
+        if Lexer.lex_test(codeEditor):
+            print("OK")
+        else:
+            errors = ErrorLog()
+            self.errores.clear()
+            self.errores.insertPlainText(errors.log)
+            errors.log = ""
 
     def Run_code(self):
         ### Envia el codigo compilado usando compile_start

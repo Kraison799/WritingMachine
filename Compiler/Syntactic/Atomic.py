@@ -10,6 +10,7 @@
 # ------------------------------------------------------------
 import WritingMachine.Compiler.Syntactic.Parser as parser
 from WritingMachine.Compiler.Semantic.TypeModels import *
+from WritingMachine.Compiler.ErrorLog import ErrorLog
 
 #BOOLEAN VALUES
 def p_bool_true(p):
@@ -56,15 +57,19 @@ def p_operand_id(p):
 def p_error(p):
 
     if p:
-        error_message = "Syntax error in line: " + str(p.lineno)
-        print(error_message)
+        error_message = "Syntax error in line: " + str(p.lineno) + " "
         parser.syntax_err = True
+        error = ErrorLog()
+        error.log_error(error_message)
+
+
 
 
 
     if p.value == "PARA":
-        error_message = "SYNTAX ERROR IN LINE " + str(p.lineno)+": NO INITIAL COMMENT"
-        print(error_message)
+        error_message = "SYNTAX ERROR IN LINE " + str(p.lineno)+": NO INITIAL COMMENT "
         parser.syntax_err = True
+
+
 
 

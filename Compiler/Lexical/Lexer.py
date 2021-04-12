@@ -13,7 +13,6 @@ import WritingMachine.Compiler.Syntactic.Parser as syntactic
 from WritingMachine.Compiler.Lexical.Rules import *
 
 
-
 # TEST
 
 def lex_test(codeEditor):
