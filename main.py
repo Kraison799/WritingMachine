@@ -12,7 +12,8 @@ from tkinter import messagebox as mb
 import tkinter as tk
 
 import Compiler.Lexical.Lexer as Lexer
-from WritingMachine.Compiler.ErrorLog import ErrorLog
+from Compiler.ErrorLog import ErrorLog
+from Compiler.Gcode import gcode
 
 qtCreatorFile = "IDE.ui"
 
@@ -165,6 +166,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def Run_code(self):
         ### Envia el codigo compilado usando compile_start
         print("Ejecucion")
+        gt = gcode()
+        gt.limpiar()
         Lexer.lex_test(codeEditor)
 
 if __name__ == "__main__":
