@@ -169,6 +169,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         gt = gcode()
         gt.limpiar()
         Lexer.lex_test(codeEditor)
+        # gt.enviarGcode()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

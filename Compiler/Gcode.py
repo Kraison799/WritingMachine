@@ -22,6 +22,9 @@ class gcode:
         datos = ""
         f.write(datos.encode())
         f.close()
+        escribir = gcode()
+        DataGcode = "G91 X0 Y0 F200"
+        escribir.escribir(DataGcode)
 
     def moverXpositivo(self, dir):
         escribir = gcode()
@@ -45,12 +48,12 @@ class gcode:
 
     def subir(self):
         escribir = gcode()
-        DataGcode = "G90\n" + "G1 Z1"
+        DataGcode = "\nm3 s90"
         escribir.escribir(DataGcode)
 
     def bajar(self):
         escribir = gcode()
-        DataGcode = "G90\n" + "G1 Z0"
+        DataGcode = "\nm5"
         escribir.escribir(DataGcode)
 
     def velocidad(self, dir):
@@ -80,10 +83,10 @@ class gcode:
 
     def enviarGcode(self):
         # Open grbl serial port
-        s = serial.Serial('COM4', 115200)
+        s = serial.Serial('COM3', 115200)
 
         # Open g-code file
-        f = open('data.gcode', 'r')
+        f = open('Compiler\data.gcode', 'r')
 
         # Wake up grbl
         s.write("\r\n\r\n".encode())
@@ -100,7 +103,7 @@ class gcode:
             print(' : ' + grbl_out.strip().__str__())
 
         # Wait here until grbl is finished to close serial port and file.
-        raw_input("  Press <Enter> to exit and disable grbl.")
+        # raw_input("  Press <Enter> to exit and disable grbl.")
 
         # Close file and serial port
         f.close()

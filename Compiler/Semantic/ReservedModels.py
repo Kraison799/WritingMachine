@@ -8,11 +8,11 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Compiler.Gcode import gcode
-from Compiler.Semantic.SemanticError import SemanticError
-from Compiler.Semantic.TypeModels import *
-from Compiler.Semantic.OperationModels import *
-from Compiler.Syntactic import Parser as parser
+from WritingMachine.Compiler.Gcode import gcode
+from WritingMachine.Compiler.Semantic.SemanticError import SemanticError
+from WritingMachine.Compiler.Semantic.TypeModels import *
+from WritingMachine.Compiler.Semantic.OperationModels import *
+from WritingMachine.Compiler.Syntactic import Parser as parser
 
 
 
