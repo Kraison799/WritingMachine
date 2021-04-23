@@ -20,6 +20,7 @@ chain = Chain()
 precedence = (('right', 'UMINUS'),)
 start = 'structure'
 syntax_err = False
+semantic_err = False
 Err_log = ""
 
 
@@ -49,10 +50,22 @@ syntactic = yacc.yacc()
 def build(lex):
 
     result = syntactic.parse(lexer=lex)
+
     if not syntax_err:
-        print(result.chain[1].statements[1].sequence.actions)
         semantic = Evaluate(result)
         semantic.start()
+        if semantic_err:
+            print("SEMANTIC ERROR")
+            parser.symbol_table = {}
+            parser.current_scope = None
+            parser.Err_log = ""
+            parser.semantic_err = False
+            parser.syntax_err = False
+            return False
+        else:
+            return True
+    else:
+        return False
 
 
 

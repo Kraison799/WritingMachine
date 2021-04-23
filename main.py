@@ -11,9 +11,10 @@ from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
 import tkinter as tk
 
-import Compiler.Lexical.Lexer as Lexer
-from Compiler.ErrorLog import ErrorLog
-from Compiler.Gcode import gcode
+
+from WritingMachine.Compiler.ErrorLog import ErrorLog
+from WritingMachine.Compiler.Gcode import gcode
+import WritingMachine.Compiler.Lexical.Lexer as lexer
 
 qtCreatorFile = "IDE.ui"
 
@@ -153,23 +154,34 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         gt = gcode()
         gt.limpiar()
+        compilation = lexer.lex_test(codeEditor)
 
-        if Lexer.lex_test(codeEditor):
+        if compilation:
             print("OK")
-        else:
+            self.errores.clear()
+            self.errores.setStyleSheet("QPlainTextEdit { color: green}")
+            self.errores.insertPlainText("COMPILATION SUCCESSFUL")
+
+        if not compilation:
+            print("ENTRO")
             errors = ErrorLog()
             self.errores.clear()
             self.errores.setStyleSheet("QPlainTextEdit { color: red}")
             self.errores.insertPlainText(errors.log)
+            print(errors.log)
             errors.log = ""
+
+
+
 
     def Run_code(self):
         ### Envia el codigo compilado usando compile_start
         print("Ejecucion")
         gt = gcode()
         gt.limpiar()
-        Lexer.lex_test(codeEditor)
-        # gt.enviarGcode()
+        lexer.lex_test(codeEditor)
+        gt.enviarGcode()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

@@ -29,10 +29,14 @@ class Evaluate:
             main_count = 0
             for procedure in self.procedures:
                 if procedure.id == "main":
-                    main_count += 1
-                    parser.symbol_table[procedure.id] = []
-                    self.main = copy.deepcopy(procedure)
-                    self.procedures.remove(procedure)
+                    if procedure.arguments != []:
+                        self.error = SemanticError(2.1)
+                        self.error.process()
+                    else:
+                        main_count += 1
+                        parser.symbol_table[procedure.id] = []
+                        self.main = copy.deepcopy(procedure)
+                        self.procedures.remove(procedure)
 
 
             if main_count == 0:
@@ -42,9 +46,18 @@ class Evaluate:
                 self.error = SemanticError(2)
                 self.error.process()
             else:
+
                 for procedure in self.procedures:
-                    parser.symbol_table[procedure.id] = []
-                print(parser.symbol_table)
+                    arg_amount = len(procedure.arguments)
+                    proc_name = procedure.id+str(arg_amount)
+                    print("evaluating proc name: ", proc_name)
+                    if proc_name in parser.symbol_table:
+                        self.error = SemanticError(9)
+                        self.error.process()
+                        print(parser.symbol_table)
+                    else:
+                        parser.symbol_table[proc_name] = []
+                        print(parser.symbol_table)
                 return 1
 
 

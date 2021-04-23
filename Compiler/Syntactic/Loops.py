@@ -8,9 +8,9 @@
 # in the Writing Machine language
 # TEC 2021 | CE3104 - Lenguajes, Compiladores e Interpretes
 # ------------------------------------------------------------
-from Compiler.Syntactic.Comparisons import *
-from Compiler.Syntactic.Atomic import *
-import Compiler.Syntactic.Parser as parser
+from WritingMachine.Compiler.Syntactic.Comparisons import *
+from WritingMachine.Compiler.Syntactic.Atomic import *
+import WritingMachine.Compiler.Syntactic.Parser as parser
 
 def p_loop_Until(p):
     'loop : Until LSQRBRACKET sequence RSQRBRACKET LSQRBRACKET comparison RSQRBRACKET'

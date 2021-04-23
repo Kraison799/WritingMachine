@@ -15,8 +15,15 @@ from WritingMachine.Compiler.Lexical.Rules import *
 
 # TEST
 
+
 def lex_test(codeEditor):
     lexer = lex.lex()
+    print(codeEditor.toPlainText())
     data = codeEditor.toPlainText()
     lexer.input(data)
-    syntactic.build(lexer)
+    result = syntactic.build(lexer)
+    print(result, "AAAAA")
+    return result
+
+
+

@@ -17,6 +17,7 @@ statements = []
 
 def p_procedure(p):
     'procedure : Para ID LSQRBRACKET argument RSQRBRACKET statements Fin'
+    line = p.lineno(1)
     args = copy.deepcopy(arguments)
     arguments.clear()
     stats = copy.deepcopy(statements)
@@ -24,6 +25,9 @@ def p_procedure(p):
     seq.actions.clear()
     result = Procedure(p[2], args, stats)
     p[0] = result
+
+def p_proc_call(p):
+    'proc_call : ID LSQRBRACKET'
 
 
 def p_statements_01(p):

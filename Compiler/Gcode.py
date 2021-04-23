@@ -48,12 +48,12 @@ class gcode:
 
     def subir(self):
         escribir = gcode()
-        DataGcode = "\nm3 s90"
+        DataGcode = "m5\n"
         escribir.escribir(DataGcode)
 
     def bajar(self):
         escribir = gcode()
-        DataGcode = "\nm5"
+        DataGcode = "m3 s90\n"
         escribir.escribir(DataGcode)
 
     def velocidad(self, dir):
@@ -90,7 +90,7 @@ class gcode:
 
         # Wake up grbl
         s.write("\r\n\r\n".encode())
-        time.sleep(2)  # Wait for grbl to initialize
+        time.sleep(3)  # Wait for grbl to initialize
         s.flushInput()  # Flush startup text in serial input
 
         # Stream g-code to grbl

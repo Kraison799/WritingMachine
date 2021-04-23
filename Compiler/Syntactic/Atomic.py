@@ -58,6 +58,7 @@ def p_error(p):
 
     if p:
         error_message = "Syntax error in line: " + str(p.lineno) + " "
+        # print(error_message)
         parser.syntax_err = True
         error = ErrorLog()
         error.log_error(error_message)
