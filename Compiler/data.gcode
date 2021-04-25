@@ -1,1 +1,315 @@
 G91 X0 Y0 F200
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X3 Y4
+G90
+G1 X5 Y2
+G90
+G1 X5 Y-2
+G90
+G1 X3 Y-4
+G90
+G1 X0 Y-5
+G90
+G1 X-3 Y-4
+G90
+G1 X-5 Y-2
+G90
+G1 X-5 Y2
+G90
+G1 X-3 Y4
+G90
+G1 X0 Y5
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X-3 Y-4
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X0 Y-5
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X3 Y-4
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X5 Y-2
+m5
+
+G90
+G1 X0 Y5
+m3 s90
+
+G90
+G1 X5 Y2
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X-3 Y-4
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X0 Y-5
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X3 Y-4
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X5 Y-2
+m5
+
+G90
+G1 X3 Y4
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X3 Y4
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X-3 Y-4
+m5
+
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X0 Y-5
+m5
+
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X3 Y-4
+m5
+
+G90
+G1 X5 Y2
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X5 Y2
+G90
+G1 X5 Y-2
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X5 Y-2
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X5 Y-2
+m3 s90
+
+G90
+G1 X-3 Y-4
+m5
+
+G90
+G1 X5 Y-2
+m3 s90
+
+G90
+G1 X0 Y-5
+m5
+
+G90
+G1 X5 Y-2
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X5 Y-2
+G90
+G1 X3 Y-4
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X3 Y-4
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X3 Y-4
+m3 s90
+
+G90
+G1 X-3 Y-4
+m5
+
+G90
+G1 X3 Y-4
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X3 Y-4
+G90
+G1 X0 Y-5
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X0 Y-5
+m3 s90
+
+G90
+G1 X-5 Y-2
+m5
+
+G90
+G1 X0 Y-5
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X0 Y-5
+G90
+G1 X-3 Y-4
+m3 s90
+
+G90
+G1 X-5 Y2
+m5
+
+G90
+G1 X-3 Y-4
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X-3 Y-4
+G90
+G1 X-5 Y-2
+m3 s90
+
+G90
+G1 X-3 Y4
+m5
+
+G90
+G1 X-5 Y-2

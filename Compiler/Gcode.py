@@ -78,7 +78,7 @@ class gcode:
 
     def puntosIniciales(self):
         escribir = gcode()
-        DataGcode = "G90\n" + "G1 X1 Y1"
+        DataGcode = "G90\n" + "G1 X0 Y0"
         escribir.escribir(DataGcode)
 
     def enviarGcode(self):

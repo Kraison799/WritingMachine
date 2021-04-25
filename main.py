@@ -21,6 +21,7 @@ qtCreatorFile = "IDE.ui"
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 
+
 class LineNumberArea(QWidget):
     def __init__(self, editor):
         super().__init__(editor)
@@ -154,15 +155,17 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         gt = gcode()
         gt.limpiar()
-        compilation = lexer.lex_test(codeEditor)
 
-        if compilation:
+        if lexer.lex_test(codeEditor):
             print("OK")
+            errors = ErrorLog()
             self.errores.clear()
             self.errores.setStyleSheet("QPlainTextEdit { color: green}")
             self.errores.insertPlainText("COMPILATION SUCCESSFUL")
+            errors.log = ""
+            compilation = -1
 
-        if not compilation:
+        else:
             print("ENTRO")
             errors = ErrorLog()
             self.errores.clear()
@@ -170,8 +173,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.errores.insertPlainText(errors.log)
             print(errors.log)
             errors.log = ""
-
-
 
 
     def Run_code(self):

@@ -38,3 +38,6 @@ class Chain:
     def __init__(self):
         self.chain = []
 
+    def __del__(self):
+        self.chain = []
+

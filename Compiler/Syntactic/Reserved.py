@@ -150,17 +150,21 @@ def p_reserved_down(p):
 
 
 def p_reserved_pos(p):
-    'reserved : Pos LSQRBRACKET numerical COMMA numerical RSQRBRACKET SEMICOLON'
-    p[0] = Pos(p[3], p[5])
+    '''reserved : Pos LSQRBRACKET numerical COMMA numerical RSQRBRACKET SEMICOLON
+                | Pos LSQRBRACKET ID COMMA ID RSQRBRACKET SEMICOLON'''
+    line = p.lineno(1)
+    p[0] = Pos(p[3], p[5],line)
 
 
 def p_reserved_posX(p):
-    'reserved : PosX numerical SEMICOLON'
+    '''reserved : PosX numerical SEMICOLON
+                | PosX ID SEMICOLON'''
     p[0] = PosX(p[2])
 
 
 def p_reserved_posY(p):
-    'reserved : PosY numerical SEMICOLON'
+    '''reserved : PosY numerical SEMICOLON
+                | PosY ID SEMICOLON'''
     p[0] = PosY(p[2])
 
 

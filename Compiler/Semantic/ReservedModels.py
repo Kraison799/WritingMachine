@@ -390,24 +390,40 @@ class ContinueUp:
     def get_var(self, id):
         found = False
 
-        for variable in parser.symbol_table[parser.current_scope]:
-            if id == variable[0]:
-                if variable[1] == int:
-                    return variable[2]
-                else:
-                    error = SemanticError(5, self.line)
+        if parser.current_scope != "main":
+            for variable in parser.symbol_table[parser.current_scope]:
+                print('getvar local')
+                if id == variable[0]:
+                    if variable[1] == int:
+                        return variable[2]
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if not found:
+                for variable in parser.symbol_table["main"]:
+                    print('getvar main')
+                    if id == variable[0]:
+                        if variable[1] == int:
+                            return variable[2]
+                        else:
+                            error = SemanticError(5, self.line)
+                            error.process()
+                if not found:
+                    error = SemanticError(6, self.line)
                     error.process()
 
-        for variable in parser.symbol_table["main"]:
-            if id == variable[0]:
-                if variable[1] == int:
-                    return variable[2]
-                else:
-                    error = SemanticError(5, self.line)
-                    error.process()
-        if not found:
-            error = SemanticError(6, self.line)
-            error.process()
+        if parser.current_scope == "main":
+            for variable in parser.symbol_table["main"]:
+                print('getvar main')
+                if id == variable[0]:
+                    if variable[1] == int:
+                        return variable[2]
+                    else:
+                        error = SemanticError(5, self.line)
+                        error.process()
+            if not found:
+                error = SemanticError(6, self.line)
+                error.process()
 
 
 class ContinueDown:
@@ -712,16 +728,51 @@ class Down:
 
 class Pos:
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, line):
         self.x = x
         self.y = y
+        self.line = line
+
+    def get_var(self, id):
+        found = False
+
+        for variable in parser.symbol_table[parser.current_scope]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+
+        for variable in parser.symbol_table["main"]:
+            if id == variable[0]:
+                if variable[1] == int:
+                    return variable[2]
+                else:
+                    error = SemanticError(5, self.line)
+                    error.process()
+        if not found:
+            error = SemanticError(6, self.line)
+            error.process()
 
     def calculate(self):
-        result = ["Pos", self.x, self.y]
-        print(result)
-        gt = gcode()
-        gt.posxy(self.x,self.y)
-        return result
+
+        if isinstance(self.x,int) and isinstance(self.y,int):
+            result = ["Pos", self.x, self.y]
+            print(result)
+            gt = gcode()
+            gt.posxy(self.x, self.y)
+            return result
+
+        if isinstance(self.x, str) and isinstance(self.y, str):
+            x_value = self.get_var(self.x)
+            y_value = self.get_var(self.y)
+            result = ["Pos", x_value, y_value]
+            print(result)
+            gt = gcode()
+            gt.posxy(x_value, y_value)
+            return result
+
 
 
 class PosX:

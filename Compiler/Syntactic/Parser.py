@@ -38,21 +38,23 @@ def p_chain(p):
     chain.chain.insert(0,p[1])
     p[0] = chain
 
+def p_chain_comment(p):
+    'chain : COMMENT chain'
+    p[0] = p[2]
 
 def p_chain_empty(p):
     'chain :'
     pass
 
 
-syntactic = yacc.yacc()
+
 
 # Build the parser
 def build(lex):
 
-    result = syntactic.parse(lexer=lex)
-
+    syntactic = yacc.yacc()
     if not syntax_err:
-        semantic = Evaluate(result)
+        semantic = Evaluate(syntactic.parse(lexer=lex))
         semantic.start()
         if semantic_err:
             print("SEMANTIC ERROR")
@@ -61,10 +63,25 @@ def build(lex):
             parser.Err_log = ""
             parser.semantic_err = False
             parser.syntax_err = False
+            del semantic
+            chain.chain = []
             return False
         else:
+            parser.symbol_table = {}
+            parser.current_scope = None
+            parser.Err_log = ""
+            parser.semantic_err = False
+            parser.syntax_err = False
+            chain.chain = []
+            del semantic
             return True
     else:
+        parser.symbol_table = {}
+        parser.current_scope = None
+        parser.Err_log = ""
+        parser.semantic_err = False
+        parser.syntax_err = False
+        chain.chain = []
         return False
 
 

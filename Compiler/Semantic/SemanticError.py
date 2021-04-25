@@ -26,39 +26,44 @@ class SemanticError:
             parser.semantic_err = True
             self.error.log_error(err_message)
 
-
         if self.code == 2:
             parser.symbol_table.clear()
-            print("SEMANTIC ERROR: MULTIPLE MAIN PROCEDURES DECLARED")
+            err_message = "SEMANTIC ERROR: MULTIPLE MAIN PROCEDURES DECLARED"
             parser.semantic_err = True
+            self.error.log_error(err_message)
+
         if self.code == 2.1:
             parser.symbol_table.clear()
-            print("SEMANTIC ERROR: MAIN CANNOT RECEIVE PARAMETERS")
+            err_message = "SEMANTIC ERROR: MAIN CANNOT RECEIVE PARAMETERS"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 3:
-            print("SEMANTIC ERROR IN LINE " + str(self.line) + ": VARIABLE ALREADY DECLARED")
-            #MANDAR AL IDE
+            err_message = "SEMANTIC ERROR IN LINE " + str(self.line) + ": VARIABLE ALREADY DECLARED"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 4:
-            print("SEMANTIC ERROR IN LINE " + str(self.line) + ": NO SUCH VARIABLE OF INT TYPE EXIST")
+            err_message = "SEMANTIC ERROR IN LINE " + str(self.line) + ": NO SUCH VARIABLE OF INT TYPE EXIST"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 5:
             print("SEMANTIC ERROR IN LINE " + str(self.line) + ": TYPE ASSIGNATION ERROR")
             parser.semantic_err = True
         if self.code == 6:
-            print("SEMANTIC ERROR IN LINE " + str(self.line) + ": VARIABLE DOES NOT EXIST")
-            # sys.exit(1)
+            err_message = "SEMANTIC ERROR IN LINE " + str(self.line) + ": VARIABLE DOES NOT EXIST"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 7:
-            print("SEMANTIC ERROR IN LINE " + str(self.line) + ": GLOBAL VARIABLE DOES NOT EXIST")
-            # sys.exit(1)
+            err_message = "SEMANTIC ERROR IN LINE " + str(self.line) + ": GLOBAL VARIABLE DOES NOT EXIST"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 8:
-            print("SEMANTIC ERROR IN LINE " + str(self.line) + ": MAXIMUM RECURSION EXCEEDED")
+            err_message = "SEMANTIC ERROR IN LINE " + str(self.line) + ": MAXIMUM RECURSION EXCEEDED"
             parser.semantic_err = True
+            self.error.log_error(err_message)
         if self.code == 9:
             parser.symbol_table.clear()
-            print("SEMANTIC ERROR" + ": DUPLICATE PROCEDURE SIGNATURE")
+            err_message = "SEMANTIC ERROR" + ": DUPLICATE PROCEDURE SIGNATURE"
             parser.semantic_err = True
+            self.error.log_error(err_message)
 
 

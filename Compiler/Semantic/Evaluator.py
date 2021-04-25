@@ -8,11 +8,16 @@ from WritingMachine.Compiler.Syntactic import Parser as parser
 from WritingMachine.Compiler.Semantic.SemanticError import SemanticError
 
 
-
 class Evaluate:
 
     def __init__(self, ast):
         self.ast = ast
+        self.procedures = None
+        self.main = None
+        self.error = SemanticError(0)
+
+    def __del__(self):
+        self.ast = None
         self.procedures = None
         self.main = None
         self.error = SemanticError(0)
@@ -48,17 +53,21 @@ class Evaluate:
             else:
 
                 for procedure in self.procedures:
-                    arg_amount = len(procedure.arguments)
-                    proc_name = procedure.id+str(arg_amount)
-                    print("evaluating proc name: ", proc_name)
-                    if proc_name in parser.symbol_table:
-                        self.error = SemanticError(9)
-                        self.error.process()
-                        print(parser.symbol_table)
-                    else:
-                        parser.symbol_table[proc_name] = []
-                        print(parser.symbol_table)
-                return 1
+                    print("Evaluating procedure " + procedure.id)
+                    parser.symbol_table[procedure.id] = []
+                    print(parser.symbol_table)
+                    # arg_amount = len(procedure.arguments)
+                    # proc_name = procedure.id+str(arg_amount)
+                    # print("evaluating proc name: ", proc_name)
+                    # if proc_name in parser.symbol_table:
+                    #     self.error = SemanticError(9)
+                    #     self.error.process()
+                    #     print(parser.symbol_table)
+                    # else:
+                    #     procedure.id = proc_name
+                    #     parser.symbol_table[proc_name] = []
+                    #     print(parser.symbol_table)
+                    return 1
 
 
     def start(self):
