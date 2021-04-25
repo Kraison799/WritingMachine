@@ -61,6 +61,10 @@ def p_order_loop(p):
     'order : loop'
     p[0] = p[1]
 
+def p_order_comment(p):
+    'order : COMMENT'
+    p[0] = p[1]
+
 
 def p_conditional_if(p):
     'conditional : If LPAREN comparison RPAREN LSQRBRACKET sequence RSQRBRACKET SEMICOLON'

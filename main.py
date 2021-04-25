@@ -163,7 +163,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.errores.setStyleSheet("QPlainTextEdit { color: green}")
             self.errores.insertPlainText("COMPILATION SUCCESSFUL")
             errors.log = ""
-            compilation = -1
 
         else:
             print("ENTRO")

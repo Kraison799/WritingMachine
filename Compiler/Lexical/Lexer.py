@@ -22,7 +22,6 @@ def lex_test(codeEditor):
     data = codeEditor.toPlainText()
     lexer.input(data)
     return syntactic.build(lexer)
-    print(result, "AAAAA")
 
 
 
